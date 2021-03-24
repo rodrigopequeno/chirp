@@ -1,0 +1,58 @@
+import 'package:chirp/app/core/error/exceptions.dart';
+import 'package:chirp/app/features/welcome/data/datasources/welcome_data_source.dart';
+import 'package:chirp/app/features/welcome/domain/entities/logged_user.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:hive/hive.dart';
+import 'package:mocktail/mocktail.dart';
+
+class MockHiveInterface extends Mock implements HiveInterface {}
+
+class MockBox extends Mock implements Box {}
+
+void main() {
+  const tName = "Rodrigo Pequeno";
+  const tUser = LoggedUser(name: tName);
+
+  late MockHiveInterface mockHiveInterface;
+  late MockBox mockHiveBox;
+  late WelcomeDataSource welcomeDataSourceImpl;
+
+  setUpAll(() {
+    mockHiveInterface = MockHiveInterface();
+    mockHiveBox = MockBox();
+    welcomeDataSourceImpl = WelcomeDataSourceImpl(mockHiveInterface);
+
+    when(() => mockHiveInterface.openBox(any<String>()))
+        .thenAnswer((_) async => mockHiveBox);
+  });
+  group("signInWithName", () {
+    test('should return Logged User', () async {
+      when(() => mockHiveBox.put(any(), any())).thenAnswer((_) async => {});
+
+      final result = await welcomeDataSourceImpl.signInWithName(name: tName);
+      expect(result.name, equals(tUser.name));
+    });
+  });
+
+  group("getLoggedUser", () {
+    test('should return Logged User', () async {
+      when(() => mockHiveBox.get(any<String>())).thenReturn(tUser);
+      final result = await welcomeDataSourceImpl.getLoggedUser();
+      expect(result.name, equals(tUser.name));
+    });
+
+    test('should return UserNotLoggedIn if User is not logged', () async {
+      when(() => mockHiveBox.get(any())).thenReturn(null);
+
+      expect(() => welcomeDataSourceImpl.getLoggedUser(),
+          throwsA(isA<UserNotLoggedInException>()));
+    });
+  });
+
+  group("signOut", () {
+    test('should complete logout', () async {
+      when(() => mockHiveBox.clear()).thenAnswer((_) async => 0);
+      expect(welcomeDataSourceImpl.signOut(), completes);
+    });
+  });
+}
