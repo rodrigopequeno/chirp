@@ -20,10 +20,9 @@ void main() {
         WelcomeRepositoryImpl(welcomeDataSource: mockWelcomeDataSource);
   });
 
+  const tUuid = "88f01b0d-f4fe-4e5f-815c-dba8fbc19427";
   const tName = "Rodrigo Pequeno";
-  const tUserReturn = UserModel(
-    name: tName,
-  );
+  const tUserReturn = UserModel(name: tName, uid: tUuid);
 
   group("signInWithName", () {
     test(

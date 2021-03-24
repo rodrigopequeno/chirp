@@ -17,7 +17,8 @@ void main() {
   });
 
   const tName = "Rodrigo Pequeno";
-  const tUser = LoggedUser(name: tName);
+  const tUuid = "88f01b0d-f4fe-4e5f-815c-dba8fbc19427";
+  const tUser = LoggedUser(name: tName, uid: tUuid);
 
   test('should welcome with name through the repository', () async {
     when(() => mockWelcomeRepository.signInWithName(any<String>()))

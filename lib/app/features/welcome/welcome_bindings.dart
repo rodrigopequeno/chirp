@@ -21,7 +21,8 @@ class WelcomeBinding implements Bindings {
         fenix: true);
 
     // Data sources
-    Get.lazyPut<WelcomeDataSource>(() => WelcomeDataSourceImpl(Get.find()),
+    Get.lazyPut<WelcomeDataSource>(
+        () => WelcomeDataSourceImpl(Get.find(), Get.find()),
         fenix: true);
   }
 

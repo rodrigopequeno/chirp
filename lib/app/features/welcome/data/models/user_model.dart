@@ -3,7 +3,8 @@ import 'package:hive/hive.dart';
 import '../../domain/entities/logged_user.dart';
 
 class UserModel extends LoggedUser {
-  const UserModel({required String name}) : super(name: name);
+  const UserModel({required String uid, required String name})
+      : super(uid: uid, name: name);
 }
 
 class UserModelAdapter extends TypeAdapter<UserModel> {
@@ -18,15 +19,18 @@ class UserModelAdapter extends TypeAdapter<UserModel> {
     };
     return UserModel(
       name: fields[0] as String,
+      uid: fields[1] as String,
     );
   }
 
   @override
   void write(BinaryWriter writer, UserModel obj) {
     writer
-      ..writeByte(1)
+      ..writeByte(2)
       ..writeByte(0)
-      ..write(obj.name);
+      ..write(obj.name)
+      ..writeByte(1)
+      ..write(obj.uid);
   }
 
   @override

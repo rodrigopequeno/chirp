@@ -18,7 +18,8 @@ void main() {
   late MockAuthCubit mockAuthCubit;
 
   const tName = "Rodrigo Pequeno";
-  const tLoggedUser = LoggedUser(name: tName);
+  const tUuid = "88f01b0d-f4fe-4e5f-815c-dba8fbc19427";
+  const tLoggedUser = LoggedUser(name: tName, uid: tUuid);
 
   setUpAll(() {
     registerFallbackValue<Params>(const Params(name: tName));
