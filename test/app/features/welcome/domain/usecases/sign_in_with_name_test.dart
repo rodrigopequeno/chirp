@@ -1,0 +1,32 @@
+import 'package:chirp/app/features/welcome/domain/entities/logged_user.dart';
+import 'package:chirp/app/features/welcome/domain/repositories/welcome_repository.dart';
+import 'package:chirp/app/features/welcome/domain/usecases/sign_in_with_name.dart';
+import 'package:dartz/dartz.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:mocktail/mocktail.dart';
+
+class MockWelcomeRepository extends Mock implements WelcomeRepository {}
+
+void main() {
+  late SignInWithName usecase;
+  late MockWelcomeRepository mockWelcomeRepository;
+
+  setUp(() {
+    mockWelcomeRepository = MockWelcomeRepository();
+    usecase = SignInWithName(mockWelcomeRepository);
+  });
+
+  const tName = "Rodrigo Pequeno";
+  const tUser = LoggedUser(name: tName);
+
+  test('should welcome with name through the repository', () async {
+    when(() => mockWelcomeRepository.signInWithName(any<String>()))
+        .thenAnswer((_) async => const Right(tUser));
+
+    final result = await usecase(const Params(name: tName));
+
+    expect(result, const Right(tUser));
+    verify(() => mockWelcomeRepository.signInWithName(tName));
+    verifyNoMoreInteractions(mockWelcomeRepository);
+  });
+}
