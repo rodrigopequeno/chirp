@@ -17,19 +17,22 @@ void main() {
     usecase = GetAllPosts(mockPostsRepository);
   });
 
-  final tPost = Posts(
-    authorName: 'Rodrigo Pequeno',
-    content: "Seja bem vindo",
-    published: DateTime.now(),
-  );
+  final tPosts = List<Post>.from([
+    Post(
+      id: '0',
+      authorName: 'Rodrigo Pequeno',
+      content: "Seja bem vindo",
+      published: DateTime.now(),
+    )
+  ]);
 
   test('should get all posts from the repository', () async {
     when(() => mockPostsRepository.getAllPosts())
-        .thenAnswer((_) async => Right(tPost));
+        .thenAnswer((_) async => Right(tPosts));
 
     final result = await usecase(const NoParams());
 
-    expect(result, Right(tPost));
+    expect(result, Right(tPosts));
     verify(() => mockPostsRepository.getAllPosts());
     verifyNoMoreInteractions(mockPostsRepository);
   });
