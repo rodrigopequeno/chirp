@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:chirp/app/features/posts/data/models/author_model.dart';
 import 'package:chirp/app/features/posts/data/models/post_model.dart';
 import 'package:hive/hive.dart';
 
@@ -20,6 +21,7 @@ class PostsLocalDataSourceImpl implements PostsLocalDataSource {
 
   PostsLocalDataSourceImpl({required this.hive}) {
     hive.registerAdapter<PostModel>(PostModelAdapter());
+    hive.registerAdapter<AuthorModel>(AuthorModelAdapter());
   }
 
   @override
