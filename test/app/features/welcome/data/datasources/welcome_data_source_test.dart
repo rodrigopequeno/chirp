@@ -1,4 +1,5 @@
 import 'package:chirp/app/core/error/exceptions.dart';
+import 'package:chirp/app/core/utils/uuid_generator.dart';
 import 'package:chirp/app/features/welcome/data/datasources/welcome_data_source.dart';
 import 'package:chirp/app/features/welcome/domain/entities/logged_user.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -9,19 +10,25 @@ class MockHiveInterface extends Mock implements HiveInterface {}
 
 class MockBox extends Mock implements Box {}
 
+class MockUuidGenerator extends Mock implements UuidGenerator {}
+
 void main() {
   const tName = "Rodrigo Pequeno";
-  const tUser = LoggedUser(name: tName);
+  const tUuid = "88f01b0d-f4fe-4e5f-815c-dba8fbc19427";
+  const tUser = LoggedUser(name: tName, uid: tUuid);
 
   late MockHiveInterface mockHiveInterface;
   late MockBox mockHiveBox;
+  late MockUuidGenerator mockUuidGenerator;
   late WelcomeDataSource welcomeDataSourceImpl;
 
   setUpAll(() {
     mockHiveInterface = MockHiveInterface();
     mockHiveBox = MockBox();
-    welcomeDataSourceImpl = WelcomeDataSourceImpl(mockHiveInterface);
-
+    mockUuidGenerator = MockUuidGenerator();
+    welcomeDataSourceImpl =
+        WelcomeDataSourceImpl(mockHiveInterface, mockUuidGenerator);
+    when(() => mockUuidGenerator.generated).thenReturn(tUuid);
     when(() => mockHiveInterface.openBox(any<String>()))
         .thenAnswer((_) async => mockHiveBox);
   });

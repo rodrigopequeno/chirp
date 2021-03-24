@@ -1,4 +1,5 @@
 import 'package:chirp/app/core/error/exceptions.dart';
+import 'package:chirp/app/core/utils/uuid_generator.dart';
 import 'package:chirp/app/features/welcome/data/models/user_model.dart';
 import 'package:chirp/app/features/welcome/domain/entities/logged_user.dart';
 import 'package:hive/hive.dart';
@@ -13,15 +14,16 @@ const kBoxUserInfo = "BOX_USER_INFO";
 
 class WelcomeDataSourceImpl implements WelcomeDataSource {
   final HiveInterface hive;
+  final UuidGenerator uuid;
 
-  WelcomeDataSourceImpl(this.hive) {
+  WelcomeDataSourceImpl(this.hive, this.uuid) {
     hive.registerAdapter<UserModel>(UserModelAdapter());
   }
 
   @override
   Future<UserModel> signInWithName({required String name}) async {
     try {
-      final user = UserModel(name: name);
+      final user = UserModel(uid: uuid.generated, name: name);
       final box = await _openBox(kBoxUserInfo);
       box.put(kBoxUserInfo, user);
       return user;
@@ -36,7 +38,8 @@ class WelcomeDataSourceImpl implements WelcomeDataSource {
 
     final user = box.get(kBoxUserInfo);
     if (user == null) throw UserNotLoggedInException();
-    return UserModel(name: (user as LoggedUser).name);
+    final loggedUser = user as LoggedUser;
+    return UserModel(uid: loggedUser.uid, name: loggedUser.name);
   }
 
   @override

@@ -18,7 +18,8 @@ void main() {
   });
 
   const tName = "Rodrigo Pequeno";
-  const tUser = LoggedUser(name: tName);
+  const tUuid = "88f01b0d-f4fe-4e5f-815c-dba8fbc19427";
+  const tUser = LoggedUser(name: tName, uid: tUuid);
 
   test('should get the user logged from the repository', () async {
     when(() => mockWelcomeRepository.getLoggedUser())
