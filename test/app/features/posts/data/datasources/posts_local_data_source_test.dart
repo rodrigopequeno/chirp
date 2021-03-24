@@ -1,5 +1,6 @@
 import 'package:chirp/app/core/error/exceptions.dart';
 import 'package:chirp/app/features/posts/data/datasources/posts_local_data_source.dart';
+import 'package:chirp/app/features/posts/data/models/author_model.dart';
 import 'package:chirp/app/features/posts/data/models/post_model.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hive/hive.dart';
@@ -15,10 +16,13 @@ void main() {
   late MockBox mockHiveBox;
 
   final dateTime = DateTime(2021, 03, 23, 09, 24, 01);
+  const author = AuthorModel(
+      id: "75418de8-cf36-47c6-8850-3f958fb1b45d",
+      authorName: "Rodrigo Pequeno");
   final tPosts = [
     PostModel(
       id: '0',
-      authorName: 'Rodrigo Pequeno',
+      author: author,
       published: dateTime,
       content: 'Olá',
     )

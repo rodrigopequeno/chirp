@@ -1,4 +1,5 @@
 import 'package:chirp/app/core/usecases/usecase.dart';
+import 'package:chirp/app/features/posts/domain/entities/author.dart';
 import 'package:chirp/app/features/posts/domain/entities/posts.dart';
 import 'package:chirp/app/features/posts/domain/repositories/posts_repository.dart';
 import 'package:chirp/app/features/posts/domain/usecases/get_all_posts.dart';
@@ -17,10 +18,13 @@ void main() {
     usecase = GetAllPosts(mockPostsRepository);
   });
 
+  const author = Author(
+      id: "75418de8-cf36-47c6-8850-3f958fb1b45d",
+      authorName: "Rodrigo Pequeno");
   final tPosts = List<Post>.from([
     Post(
       id: '0',
-      authorName: 'Rodrigo Pequeno',
+      author: author,
       content: "Seja bem vindo",
       published: DateTime.now(),
     )

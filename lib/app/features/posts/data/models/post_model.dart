@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:chirp/app/features/posts/data/models/author_model.dart';
+import 'package:chirp/app/features/posts/domain/entities/author.dart';
 import 'package:hive/hive.dart';
 
 import '../../domain/entities/posts.dart';
@@ -7,28 +9,28 @@ import '../../domain/entities/posts.dart';
 class PostModel extends Post {
   const PostModel(
       {required String id,
-      required String authorName,
+      required Author author,
       required DateTime published,
       required String content})
       : super(
-          authorName: authorName,
+          author: author,
           content: content,
           published: published,
           id: id,
         );
 
   Map<String, dynamic> toMap() {
-    return {
+    final Map<String, dynamic> postMap = {
       'ID': id,
-      'AutorNome': authorName,
       'DataHora': published.millisecondsSinceEpoch,
       'Texto': content,
     };
+    return postMap..addAll((author as AuthorModel).toMap());
   }
 
   factory PostModel.fromMap(Map<String, dynamic> map) {
     return PostModel(
-      authorName: map['AutorNome'] as String,
+      author: AuthorModel.fromMap(map),
       published: DateTime.fromMillisecondsSinceEpoch(
         int.tryParse(map['DataHora'] as String) ?? 0,
       ),
@@ -55,7 +57,7 @@ class PostModelAdapter extends TypeAdapter<PostModel> {
     };
     return PostModel(
       id: fields[0] as String,
-      authorName: fields[1] as String,
+      author: fields[1] as AuthorModel,
       content: fields[2] as String,
       published: fields[3] as DateTime,
     );
@@ -68,7 +70,7 @@ class PostModelAdapter extends TypeAdapter<PostModel> {
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
-      ..write(obj.authorName)
+      ..write(obj.author)
       ..writeByte(2)
       ..write(obj.content)
       ..writeByte(3)

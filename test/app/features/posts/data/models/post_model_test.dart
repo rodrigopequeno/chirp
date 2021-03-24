@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:chirp/app/features/posts/data/models/author_model.dart';
 import 'package:chirp/app/features/posts/data/models/post_model.dart';
 import 'package:chirp/app/features/posts/domain/entities/posts.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -11,9 +12,11 @@ void main() {
   const authorName = 'Rodrigo Pequeno';
   const id = '0';
   final dateTime = DateTime(2021, 03, 23, 09, 24, 01);
+  const author = AuthorModel(
+      id: "75418de8-cf36-47c6-8850-3f958fb1b45d", authorName: authorName);
   final tPostModel = PostModel(
     id: id,
-    authorName: authorName,
+    author: author,
     content: content,
     published: dateTime,
   );
@@ -38,7 +41,8 @@ void main() {
 
       final expectedMap = {
         'ID': id,
-        'AutorNome': authorName,
+        "AutorID": author.id,
+        "AutorNome": author.authorName,
         'DataHora': dateTime.millisecondsSinceEpoch,
         'Texto': content,
       };

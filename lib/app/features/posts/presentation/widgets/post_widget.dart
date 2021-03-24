@@ -20,7 +20,7 @@ class PostWidget extends StatelessWidget {
             ),
             Row(
               children: [
-                Text("Author: ${post.authorName}"),
+                Text("Author: ${post.author.authorName}"),
                 const Spacer(),
                 Text(
                     "Date: ${DateFormat("dd/MM/yyyy").format(post.published)}"),
