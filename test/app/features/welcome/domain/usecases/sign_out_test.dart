@@ -20,7 +20,7 @@ void main() {
     when(() => mockWelcomeRepository.signOut())
         .thenAnswer((_) async => const Right(unit));
 
-    final result = await usecase(NoParams());
+    final result = await usecase(const NoParams());
 
     expect(result, const Right(unit));
     verify(() => mockWelcomeRepository.signOut());

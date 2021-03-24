@@ -24,7 +24,7 @@ void main() {
     when(() => mockWelcomeRepository.getLoggedUser())
         .thenAnswer((_) async => const Right(tUser));
 
-    final result = await usecase(NoParams());
+    final result = await usecase(const NoParams());
 
     expect(result, const Right(tUser));
     verify(() => mockWelcomeRepository.getLoggedUser());

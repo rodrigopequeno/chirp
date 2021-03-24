@@ -2,7 +2,6 @@ import 'package:chirp/app/core/error/exceptions.dart';
 import 'package:chirp/app/features/welcome/data/models/user_model.dart';
 import 'package:chirp/app/features/welcome/domain/entities/logged_user.dart';
 import 'package:hive/hive.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 
 abstract class WelcomeDataSource {
   Future<UserModel> signInWithName({required String name});
@@ -16,7 +15,6 @@ class WelcomeDataSourceImpl implements WelcomeDataSource {
   final HiveInterface hive;
 
   WelcomeDataSourceImpl(this.hive) {
-    hive.initFlutter();
     hive.registerAdapter<UserModel>(UserModelAdapter());
   }
 
