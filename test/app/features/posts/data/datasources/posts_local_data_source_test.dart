@@ -30,28 +30,52 @@ void main() {
     dataSourceImpl = PostsLocalDataSourceImpl(hive: mockHiveInterface);
   });
 
-  group('getLastPosts', () {
+  group('getCachePosts', () {
     test('''should return Posts from Hive whe there in the cache''', () async {
       when(() => mockHiveInterface.openBox(any()))
           .thenAnswer((_) async => mockHiveBox);
       when(() => mockHiveBox.get(any())).thenReturn(tPosts);
-      final result = await dataSourceImpl.getLastPosts();
+      final result = await dataSourceImpl.getCachePosts();
       verify(() => mockHiveBox.get(kCachedPosts));
       expect(result, equals(tPosts));
     });
 
     test('''
-should throw a CacheException when there is not a cached value''', () async {
+should throw a NotFoundPostsCachedException when there is not a cached value''',
+        () async {
       when(() => mockHiveInterface.openBox(any()))
           .thenAnswer((_) async => mockHiveBox);
       when(() => mockHiveBox.get(any)).thenReturn(null);
-      final call = dataSourceImpl.getLastPosts();
+      final call = dataSourceImpl.getCachePosts();
       expect(call, throwsA(isA<NotFoundPostsCachedException>()));
     });
   });
 
   group('cachePosts', () {
     test('should call Hive to cache the data', () async {
+      when(() => mockHiveInterface.openBox(any()))
+          .thenAnswer((_) async => mockHiveBox);
+      when(() => mockHiveBox.put(any(), any()))
+          .thenAnswer((_) async => Future<void>.value());
+      await dataSourceImpl.cachePosts(tPosts);
+      verify(() => mockHiveInterface.openBox(kCachedPosts));
+      verify(() => mockHiveBox.put(kCachedPosts, tPosts));
+    });
+  });
+
+  group('getPosts', () {
+    test('''should return saved Hive posts''', () async {
+      when(() => mockHiveInterface.openBox(any()))
+          .thenAnswer((_) async => mockHiveBox);
+      when(() => mockHiveBox.get(any())).thenReturn(tPosts);
+      final result = await dataSourceImpl.getCachePosts();
+      verify(() => mockHiveBox.get(kCachedPosts));
+      expect(result, equals(tPosts));
+    });
+  });
+
+  group('putPosts', () {
+    test('should call Hive to save the data', () async {
       when(() => mockHiveInterface.openBox(any()))
           .thenAnswer((_) async => mockHiveBox);
       when(() => mockHiveBox.put(any(), any()))

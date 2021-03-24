@@ -6,11 +6,14 @@ import 'package:hive/hive.dart';
 import '../../../../core/error/exceptions.dart';
 
 abstract class PostsLocalDataSource {
-  Future<List<PostModel>> getLastPosts();
+  Future<List<PostModel>> getPosts();
+  Future<void> putPosts(List<PostModel> postsToCache);
+  Future<List<PostModel>> getCachePosts();
   Future<void> cachePosts(List<PostModel> postsToCache);
 }
 
 const kCachedPosts = "CACHED_POSTS";
+const kPosts = "POSTS";
 
 class PostsLocalDataSourceImpl implements PostsLocalDataSource {
   final HiveInterface hive;
@@ -26,13 +29,26 @@ class PostsLocalDataSourceImpl implements PostsLocalDataSource {
   }
 
   @override
-  Future<List<PostModel>> getLastPosts() async {
+  Future<List<PostModel>> getCachePosts() async {
     final box = await _openBox(kCachedPosts);
     final posts = box.get(kCachedPosts);
     if (posts == null) {
       throw NotFoundPostsCachedException();
     }
     return Future.value(List<PostModel>.from(posts as List));
+  }
+
+  @override
+  Future<List<PostModel>> getPosts() async {
+    final box = await _openBox(kPosts);
+    final posts = box.get(kPosts, defaultValue: []);
+    return Future.value(List<PostModel>.from(posts as List));
+  }
+
+  @override
+  Future<void> putPosts(List<PostModel> postsToSave) async {
+    final box = await _openBox(kPosts);
+    box.put(kPosts, postsToSave);
   }
 
   Future<Box> _openBox(String type) async {

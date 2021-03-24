@@ -1,6 +1,7 @@
 import 'package:chirp/app/core/error/exceptions.dart';
 import 'package:chirp/app/core/error/failure.dart';
 import 'package:chirp/app/core/network/network_info.dart';
+import 'package:chirp/app/core/utils/character_limit.dart';
 import 'package:chirp/app/features/posts/data/datasources/posts_local_data_source.dart';
 import 'package:chirp/app/features/posts/data/datasources/posts_remote_data_source.dart';
 import 'package:chirp/app/features/posts/data/models/post_model.dart';
@@ -16,11 +17,14 @@ class MockPostsLocalDataSource extends Mock implements PostsLocalDataSource {}
 
 class MockNetworkInfo extends Mock implements NetworkInfo {}
 
+class MockCharacterLimit extends Mock implements CharacterLimit {}
+
 void main() {
   late PostsRepository repositoryImpl;
   late MockPostsRemoteDataSource mockRemoteDataSource;
   late MockPostsLocalDataSource mockLocalDataSource;
   late MockNetworkInfo mockNetworkInfo;
+  late MockCharacterLimit mockCharacterLimit;
 
   setUpAll(() {
     registerFallbackValue<List<PostModel>>(<PostModel>[]);
@@ -30,10 +34,12 @@ void main() {
     mockRemoteDataSource = MockPostsRemoteDataSource();
     mockLocalDataSource = MockPostsLocalDataSource();
     mockNetworkInfo = MockNetworkInfo();
+    mockCharacterLimit = MockCharacterLimit();
     repositoryImpl = PostsRepositoryImpl(
       remoteDataSource: mockRemoteDataSource,
       localDataSource: mockLocalDataSource,
       networkInfo: mockNetworkInfo,
+      characterLimit: mockCharacterLimit,
     );
 
     when(() => mockLocalDataSource.cachePosts(any()))
@@ -73,7 +79,9 @@ void main() {
     test('should check if the device is online', () async {
       when(() => mockRemoteDataSource.getAllPosts())
           .thenAnswer((_) async => tPosts);
+      when(() => mockLocalDataSource.getPosts()).thenAnswer((_) async => []);
       when(() => mockNetworkInfo.isConnected).thenAnswer((_) async => true);
+      when(() => mockCharacterLimit.isWithinTheLimit(any())).thenReturn(true);
       repositoryImpl.getAllPosts();
       verify(() => mockNetworkInfo.isConnected);
     });
@@ -84,9 +92,11 @@ void main() {
           () async {
         when(() => mockRemoteDataSource.getAllPosts())
             .thenAnswer((_) async => tPosts);
+        when(() => mockLocalDataSource.getPosts()).thenAnswer((_) async => []);
+        when(() => mockCharacterLimit.isWithinTheLimit(any())).thenReturn(true);
         final result = await repositoryImpl.getAllPosts();
         verify(() => mockRemoteDataSource.getAllPosts());
-        expect(result, equals(Right(tPosts)));
+        expect(result, isA<Right<dynamic, List<PostModel>>>());
       });
 
       test('''
@@ -94,6 +104,8 @@ should cache the data locally when the call to remote data source is successful'
           () async {
         when(() => mockRemoteDataSource.getAllPosts())
             .thenAnswer((_) async => tPosts);
+        when(() => mockLocalDataSource.getPosts()).thenAnswer((_) async => []);
+        when(() => mockCharacterLimit.isWithinTheLimit(any())).thenReturn(true);
         await repositoryImpl.getAllPosts();
         verify(() => mockRemoteDataSource.getAllPosts());
         verify(() => mockLocalDataSource.cachePosts(tPosts));
@@ -114,21 +126,22 @@ should return server failure when the call to remote data source is unsuccessful
     runTestsOffline(() {
       test('should return last locally cached data when cached data is present',
           () async {
-        when(() => mockLocalDataSource.getLastPosts())
+        when(() => mockLocalDataSource.getCachePosts())
             .thenAnswer((_) async => tPosts);
+        when(() => mockLocalDataSource.getPosts()).thenAnswer((_) async => []);
         final result = await repositoryImpl.getAllPosts();
         verifyZeroInteractions(mockRemoteDataSource);
-        verify(() => mockLocalDataSource.getLastPosts());
-        expect(result, equals(Right(tPosts)));
+        verify(() => mockLocalDataSource.getCachePosts());
+        expect(result, isA<Right<dynamic, List<PostModel>>>());
       });
 
       test('''
 should return CacheFailure when there is no cached data present''', () async {
-        when(() => mockLocalDataSource.getLastPosts())
+        when(() => mockLocalDataSource.getCachePosts())
             .thenThrow(NotFoundPostsCachedException());
         final result = await repositoryImpl.getAllPosts();
         verifyZeroInteractions(mockRemoteDataSource);
-        verify(() => mockLocalDataSource.getLastPosts());
+        verify(() => mockLocalDataSource.getCachePosts());
         expect(result, equals(Left(NotFoundPostsCachedFailure())));
       });
     });

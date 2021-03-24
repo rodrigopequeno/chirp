@@ -14,5 +14,6 @@ class Post extends Equatable {
   });
 
   @override
-  List<Object?> get props => [id, authorName, published, content];
+  List<Object?> get props =>
+      [id, authorName, published.millisecondsSinceEpoch, content];
 }

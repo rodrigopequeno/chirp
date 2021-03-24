@@ -26,6 +26,7 @@ class PostsBinding implements Bindings {
               localDataSource: Get.find(),
               remoteDataSource: Get.find(),
               networkInfo: Get.find(),
+              characterLimit: Get.find(),
             ),
         fenix: true);
 

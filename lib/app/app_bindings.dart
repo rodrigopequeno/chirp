@@ -1,4 +1,5 @@
 import 'package:chirp/app/core/cubit/auth_cubit.dart';
+import 'package:chirp/app/core/utils/character_limit.dart';
 import 'package:chirp/app/features/welcome/welcome_bindings.dart';
 import 'package:dio/dio.dart';
 import 'package:get/instance_manager.dart';
@@ -16,5 +17,6 @@ class AppBindings implements Bindings {
     Get.lazyPut(() => Dio());
     Get.lazyPut(() => InternetConnectionChecker());
     Get.lazyPut<NetworkInfo>(() => NetworkInfoImpl(Get.find()));
+    Get.lazyPut(() => CharacterLimit());
   }
 }
