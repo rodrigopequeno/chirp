@@ -1,3 +1,5 @@
+import 'package:chirp/app/features/posts/posts_bindings.dart';
+import 'package:chirp/app/features/posts/presentation/pages/posts_page.dart';
 import 'package:chirp/app/features/welcome/presentation/pages/welcome_page.dart';
 import 'package:chirp/app/features/welcome/welcome_bindings.dart';
 import 'package:flutter/material.dart';
@@ -19,10 +21,15 @@ Future<void> main() async {
       builder: asuka.builder,
       getPages: [
         GetPage(
-            name: '/',
-            page: () => const WelcomePage(),
-            binding: WelcomeBinding()),
-        GetPage(name: '/posts', page: () => Container()),
+          name: '/',
+          page: () => const WelcomePage(),
+          binding: WelcomeBinding(),
+        ),
+        GetPage(
+          name: '/posts',
+          page: () => const PostsPage(),
+          binding: PostsBinding(),
+        ),
       ],
     ),
   );
