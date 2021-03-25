@@ -1,7 +1,7 @@
 import 'package:hive/hive.dart';
 
+import '../../../../core/models/post_model.dart';
 import '../../../../core/utils/constants.dart';
-import '../../../posts/data/models/post_model.dart';
 import '../models/add_post_model.dart';
 
 abstract class AddPostDataSource {

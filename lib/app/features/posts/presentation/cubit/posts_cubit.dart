@@ -28,6 +28,7 @@ class PostsCubit extends Cubit<PostsState> {
         emit(PostsError(kNotFoundPostsCachedFailureMessage));
       }
     }, (posts) {
+      posts.sort();
       emit(PostsSuccess(posts));
     });
   }

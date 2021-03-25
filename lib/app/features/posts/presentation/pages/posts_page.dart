@@ -51,7 +51,7 @@ class PostsPage extends StatelessWidget {
         } else if (state is PostsError) {
           return _buildError(context, state);
         } else if (state is PostsSuccess) {
-          return _buildPosts(state);
+          return _buildPosts(context, state);
         }
         return Container();
       },
@@ -82,13 +82,16 @@ class PostsPage extends StatelessWidget {
     );
   }
 
-  ListView _buildPosts(PostsSuccess state) {
-    return ListView.builder(
-      itemCount: state.posts.length,
-      itemBuilder: (context, index) {
-        final post = state.posts[index];
-        return PostWidget(post: post);
-      },
+  Widget _buildPosts(BuildContext context, PostsSuccess state) {
+    return RefreshIndicator(
+      onRefresh: context.read<PostsCubit>().getPosts,
+      child: ListView.builder(
+        itemCount: state.posts.length,
+        itemBuilder: (context, index) {
+          final post = state.posts[index];
+          return PostWidget(post: post);
+        },
+      ),
     );
   }
 

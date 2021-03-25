@@ -21,7 +21,7 @@ void main() {
     when(() => mockPostDetailsRepository.deletePost(any()))
         .thenAnswer((_) async => const Right(unit));
 
-    final result = await usecase(const Params(uidPost: tUid));
+    final result = await usecase(const ParamsDelete(uidPost: tUid));
 
     expect(result, const Right(unit));
     verify(() => mockPostDetailsRepository.deletePost(tUid));

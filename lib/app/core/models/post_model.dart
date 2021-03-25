@@ -1,9 +1,9 @@
 import 'dart:convert';
 
-import 'package:chirp/app/core/entities/author.dart';
-import 'package:chirp/app/core/entities/post.dart';
 import 'package:hive/hive.dart';
 
+import '../entities/author.dart';
+import '../entities/post.dart';
 import 'author_model.dart';
 
 class PostModel extends Post {

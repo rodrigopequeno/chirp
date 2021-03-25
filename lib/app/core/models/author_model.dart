@@ -1,7 +1,8 @@
 import 'dart:convert';
 
-import 'package:chirp/app/core/entities/author.dart';
 import 'package:hive/hive.dart';
+
+import '../entities/author.dart';
 
 class AuthorModel extends Author {
   const AuthorModel({required String id, required String authorName})

@@ -1,7 +1,7 @@
 import 'package:chirp/app/core/error/exceptions.dart';
+import 'package:chirp/app/core/models/author_model.dart';
+import 'package:chirp/app/core/models/post_model.dart';
 import 'package:chirp/app/features/posts/data/datasources/posts_local_data_source.dart';
-import 'package:chirp/app/features/posts/data/models/author_model.dart';
-import 'package:chirp/app/features/posts/data/models/post_model.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hive/hive.dart';
 import 'package:mocktail/mocktail.dart';

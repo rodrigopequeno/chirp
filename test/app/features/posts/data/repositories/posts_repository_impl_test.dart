@@ -1,11 +1,11 @@
 import 'package:chirp/app/core/error/exceptions.dart';
 import 'package:chirp/app/core/error/failure.dart';
+import 'package:chirp/app/core/models/author_model.dart';
+import 'package:chirp/app/core/models/post_model.dart';
 import 'package:chirp/app/core/network/network_info.dart';
 import 'package:chirp/app/core/utils/character_limit.dart';
 import 'package:chirp/app/features/posts/data/datasources/posts_local_data_source.dart';
 import 'package:chirp/app/features/posts/data/datasources/posts_remote_data_source.dart';
-import 'package:chirp/app/features/posts/data/models/author_model.dart';
-import 'package:chirp/app/features/posts/data/models/post_model.dart';
 import 'package:chirp/app/features/posts/data/repositories/posts_repository_impl.dart';
 import 'package:chirp/app/features/posts/domain/repositories/posts_repository.dart';
 import 'package:dartz/dartz.dart';

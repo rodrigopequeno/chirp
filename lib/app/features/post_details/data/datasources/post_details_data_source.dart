@@ -1,7 +1,8 @@
-import 'package:chirp/app/core/error/exceptions.dart';
-import 'package:chirp/app/core/models/post_model.dart';
-import 'package:chirp/app/core/utils/constants.dart';
 import 'package:hive/hive.dart';
+
+import '../../../../core/error/exceptions.dart';
+import '../../../../core/models/post_model.dart';
+import '../../../../core/utils/constants.dart';
 
 abstract class PostDetailsDataSource {
   Future<PostModel> editPost(String uid, String newContent);
@@ -40,7 +41,7 @@ class PostDetailsDataSourceImpl implements PostDetailsDataSource {
         final post = posts[index];
         if (post.id == uid) {
           final newPost = post.copyWith(content: newContent);
-          posts.insert(index, newPost);
+          posts[index] = newPost;
           box.put(kPosts, posts);
           return newPost;
         }

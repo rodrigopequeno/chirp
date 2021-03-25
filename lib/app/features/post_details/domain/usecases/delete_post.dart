@@ -1,24 +1,25 @@
-import 'package:chirp/app/core/error/failure.dart';
-import 'package:chirp/app/core/usecases/usecase.dart';
-import 'package:chirp/app/features/post_details/domain/repositories/post_details_repository.dart';
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 
-class DeletePost implements UseCase<Unit, Params> {
+import '../../../../core/error/failure.dart';
+import '../../../../core/usecases/usecase.dart';
+import '../repositories/post_details_repository.dart';
+
+class DeletePost implements UseCase<Unit, ParamsDelete> {
   final PostDetailsRepository repository;
 
   DeletePost(this.repository);
 
   @override
-  Future<Either<Failure, Unit>> call(Params params) async {
+  Future<Either<Failure, Unit>> call(ParamsDelete params) async {
     return await repository.deletePost(params.uidPost);
   }
 }
 
-class Params extends Equatable {
+class ParamsDelete extends Equatable {
   final String uidPost;
 
-  const Params({required this.uidPost});
+  const ParamsDelete({required this.uidPost});
 
   @override
   List<Object?> get props => [uidPost];

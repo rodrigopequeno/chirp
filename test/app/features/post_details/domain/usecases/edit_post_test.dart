@@ -32,7 +32,7 @@ void main() {
         .thenAnswer((_) async => Right(tPost));
 
     final result =
-        await usecase(const Params(newContent: newContent, uid: tUid));
+        await usecase(const ParamsEdit(newContent: newContent, uid: tUid));
 
     expect(result, Right(tPost));
     verify(() => mockPostDetailsRepository.editPost(tUid, newContent));

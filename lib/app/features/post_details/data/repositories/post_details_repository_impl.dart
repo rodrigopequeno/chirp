@@ -1,10 +1,10 @@
-import 'package:chirp/app/core/error/exceptions.dart';
 import 'package:dartz/dartz.dart';
 
-import 'package:chirp/app/core/entities/post.dart';
-import 'package:chirp/app/core/error/failure.dart';
-import 'package:chirp/app/features/post_details/data/datasources/post_details_data_source.dart';
-import 'package:chirp/app/features/post_details/domain/repositories/post_details_repository.dart';
+import '../../../../core/entities/post.dart';
+import '../../../../core/error/exceptions.dart';
+import '../../../../core/error/failure.dart';
+import '../../domain/repositories/post_details_repository.dart';
+import '../datasources/post_details_data_source.dart';
 
 class PostDetailsRepositoryImpl implements PostDetailsRepository {
   PostDetailsDataSource detailsDataSource;

@@ -1,8 +1,7 @@
 import '../../../../core/entities/author.dart';
-import '../../../../core/entities/post.dart';
-import '../../../posts/data/models/post_model.dart';
+import '../../../../core/models/post_model.dart';
 
-class AddPostModel extends PostModel implements Post {
+class AddPostModel extends PostModel {
   const AddPostModel(
       {required String id,
       required Author author,

@@ -1,8 +1,8 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:chirp/app/core/error/failure.dart';
+import 'package:chirp/app/core/models/author_model.dart';
+import 'package:chirp/app/core/models/post_model.dart';
 import 'package:chirp/app/core/usecases/usecase.dart';
-import 'package:chirp/app/features/posts/data/models/author_model.dart';
-import 'package:chirp/app/features/posts/data/models/post_model.dart';
 import 'package:chirp/app/features/posts/domain/usecases/get_all_posts.dart';
 import 'package:chirp/app/features/posts/presentation/cubit/posts_cubit.dart';
 import 'package:dartz/dartz.dart';

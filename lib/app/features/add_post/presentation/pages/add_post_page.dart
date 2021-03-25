@@ -44,7 +44,7 @@ class AddPostPage extends StatelessWidget {
         }
 
         if (state is AddPostSuccess) {
-          Get.offNamed('/posts');
+          Get.offAllNamed('/posts');
         }
       },
       builder: (context, state) {

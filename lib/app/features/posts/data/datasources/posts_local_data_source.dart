@@ -3,9 +3,9 @@ import 'dart:async';
 import 'package:hive/hive.dart';
 
 import '../../../../core/error/exceptions.dart';
+import '../../../../core/models/author_model.dart';
+import '../../../../core/models/post_model.dart';
 import '../../../../core/utils/constants.dart';
-import '../models/author_model.dart';
-import '../models/post_model.dart';
 
 abstract class PostsLocalDataSource {
   Future<List<PostModel>> getPosts();
