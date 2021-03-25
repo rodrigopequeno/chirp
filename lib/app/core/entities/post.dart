@@ -1,5 +1,6 @@
-import 'package:chirp/app/core/entities/author.dart';
 import 'package:equatable/equatable.dart';
+
+import 'author.dart';
 
 abstract class Post extends Equatable {
   final String id;

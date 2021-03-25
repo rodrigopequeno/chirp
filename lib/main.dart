@@ -1,17 +1,17 @@
-import 'package:chirp/app/features/add_post/presentation/pages/add_post_page.dart';
-import 'package:chirp/app/features/posts/posts_bindings.dart';
-import 'package:chirp/app/features/posts/presentation/pages/posts_page.dart';
-import 'package:chirp/app/features/welcome/presentation/pages/welcome_page.dart';
-import 'package:chirp/app/features/welcome/welcome_bindings.dart';
+import 'package:asuka/asuka.dart' as asuka;
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:get/get_navigation/src/routes/get_route.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:asuka/asuka.dart' as asuka;
 
 import 'app/app_bindings.dart';
 import 'app/features/add_post/add_post_bindings.dart';
+import 'app/features/add_post/presentation/pages/add_post_page.dart';
+import 'app/features/posts/posts_bindings.dart';
+import 'app/features/posts/presentation/pages/posts_page.dart';
+import 'app/features/welcome/presentation/pages/welcome_page.dart';
+import 'app/features/welcome/welcome_bindings.dart';
 
 Future<void> main() async {
   await Hive.initFlutter();

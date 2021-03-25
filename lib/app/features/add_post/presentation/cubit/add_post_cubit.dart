@@ -1,16 +1,17 @@
 import 'package:bloc/bloc.dart';
-import 'package:chirp/app/core/cubit/auth_cubit.dart';
-import 'package:chirp/app/core/utils/character_limit.dart';
-import 'package:chirp/app/core/utils/uuid_generator.dart';
-import 'package:chirp/app/features/add_post/data/models/add_author_model.dart';
-import 'package:chirp/app/features/add_post/data/models/add_post_model.dart';
-import 'package:chirp/app/features/add_post/domain/usecases/create_post.dart';
 import 'package:equatable/equatable.dart';
+
+import '../../../../core/cubit/auth_cubit.dart';
+import '../../../../core/utils/character_limit.dart';
+import '../../../../core/utils/uuid_generator.dart';
+import '../../data/models/add_author_model.dart';
+import '../../data/models/add_post_model.dart';
+import '../../domain/usecases/create_post.dart';
 
 part 'add_post_state.dart';
 
-const kIsOutOfLimitFailureMessage = "O limite é 280 caracteres";
-const kDefaultFailureMessage = "Ocorreu um erro, tente novamente mais tarde";
+const kIsOutOfLimitFailureMessage = "The limit is 280 characters";
+const kDefaultFailureMessage = "An error occurred, please try again later";
 
 class AddPostCubit extends Cubit<AddPostState> {
   final CreatePost createPost;

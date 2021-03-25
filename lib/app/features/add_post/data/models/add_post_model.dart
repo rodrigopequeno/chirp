@@ -1,6 +1,6 @@
-import 'package:chirp/app/core/entities/author.dart';
-import 'package:chirp/app/core/entities/post.dart';
-import 'package:chirp/app/features/posts/data/models/post_model.dart';
+import '../../../../core/entities/author.dart';
+import '../../../../core/entities/post.dart';
+import '../../../posts/data/models/post_model.dart';
 
 class AddPostModel extends PostModel implements Post {
   const AddPostModel(

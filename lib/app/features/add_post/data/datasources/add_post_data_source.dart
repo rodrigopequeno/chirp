@@ -1,7 +1,8 @@
-import 'package:chirp/app/core/utils/constants.dart';
-import 'package:chirp/app/features/add_post/data/models/add_post_model.dart';
-import 'package:chirp/app/features/posts/data/models/post_model.dart';
 import 'package:hive/hive.dart';
+
+import '../../../../core/utils/constants.dart';
+import '../../../posts/data/models/post_model.dart';
+import '../models/add_post_model.dart';
 
 abstract class AddPostDataSource {
   Future<void> createPost(AddPostModel addPostModel);

@@ -1,5 +1,5 @@
-import 'package:chirp/app/core/entities/author.dart';
-import 'package:chirp/app/core/entities/post.dart';
+import '../../../../core/entities/author.dart';
+import '../../../../core/entities/post.dart';
 
 class ListingPost extends Post {
   const ListingPost({

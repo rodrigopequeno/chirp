@@ -1,9 +1,10 @@
 import 'dart:convert';
 
-import 'package:chirp/app/core/entities/author.dart';
-import 'package:chirp/app/core/entities/post.dart';
-import 'package:chirp/app/features/posts/data/models/author_model.dart';
 import 'package:hive/hive.dart';
+
+import '../../../../core/entities/author.dart';
+import '../../../../core/entities/post.dart';
+import 'author_model.dart';
 
 class PostModel extends Post {
   const PostModel(

@@ -1,10 +1,11 @@
-import 'package:chirp/app/core/utils/character_limit.dart';
-import 'package:chirp/app/core/widgets/loading_indicator/loading_indicator_widget.dart';
-import 'package:chirp/app/features/add_post/presentation/cubit/add_post_cubit.dart';
+import 'package:asuka/asuka.dart' as asuka;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:asuka/asuka.dart' as asuka;
 import 'package:get/get.dart';
+
+import '../../../../core/utils/character_limit.dart';
+import '../../../../core/widgets/loading_indicator/loading_indicator_widget.dart';
+import '../cubit/add_post_cubit.dart';
 
 class AddPostPage extends StatelessWidget {
   final loading = LoadingIndicatorImpl();
@@ -16,7 +17,7 @@ class AddPostPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Welcome'),
+        title: const Text('Create post'),
         centerTitle: true,
       ),
       body: Padding(
@@ -55,14 +56,14 @@ class AddPostPage extends StatelessWidget {
               keyboardType: TextInputType.multiline,
               maxLines: null,
               decoration: const InputDecoration(
-                labelText: ' Digite seu texto aqui...',
+                labelText: ' Type your text here ...',
               ),
             ),
             ElevatedButton(
               onPressed: () async => await context
                   .read<AddPostCubit>()
                   .addPost(contentController.text),
-              child: const Text('ADICIONAR TEXTO'),
+              child: const Text('CREATE POST'),
             ),
           ],
         );

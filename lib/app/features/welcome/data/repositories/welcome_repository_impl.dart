@@ -1,8 +1,9 @@
-import 'package:chirp/app/features/welcome/data/datasources/welcome_data_source.dart';
-import 'package:chirp/app/features/welcome/domain/entities/logged_user.dart';
-import 'package:chirp/app/core/error/failure.dart';
-import 'package:chirp/app/features/welcome/domain/repositories/welcome_repository.dart';
 import 'package:dartz/dartz.dart';
+
+import '../../../../core/error/failure.dart';
+import '../../domain/entities/logged_user.dart';
+import '../../domain/repositories/welcome_repository.dart';
+import '../datasources/welcome_data_source.dart';
 
 class WelcomeRepositoryImpl extends WelcomeRepository {
   final WelcomeDataSource welcomeDataSource;

@@ -1,12 +1,12 @@
-import 'package:chirp/app/features/posts/data/datasources/posts_local_data_source.dart';
-import 'package:chirp/app/features/posts/data/datasources/posts_remote_data_source.dart';
-import 'package:chirp/app/features/posts/domain/repositories/posts_repository.dart';
-import 'package:chirp/app/features/posts/domain/usecases/get_all_posts.dart';
-import 'package:chirp/app/features/posts/presentation/cubit/posts_cubit.dart';
 import 'package:get/get_instance/src/bindings_interface.dart';
 import 'package:get/instance_manager.dart';
 
+import 'data/datasources/posts_local_data_source.dart';
+import 'data/datasources/posts_remote_data_source.dart';
 import 'data/repositories/posts_repository_impl.dart';
+import 'domain/repositories/posts_repository.dart';
+import 'domain/usecases/get_all_posts.dart';
+import 'presentation/cubit/posts_cubit.dart';
 
 class PostsBinding implements Bindings {
   static void export() {}

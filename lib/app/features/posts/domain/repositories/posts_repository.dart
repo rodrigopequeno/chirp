@@ -1,6 +1,7 @@
-import 'package:chirp/app/core/entities/post.dart';
-import 'package:chirp/app/core/error/failure.dart';
 import 'package:dartz/dartz.dart';
+
+import '../../../../core/entities/post.dart';
+import '../../../../core/error/failure.dart';
 
 abstract class PostsRepository {
   Future<Either<Failure, List<Post>>> getAllPosts();

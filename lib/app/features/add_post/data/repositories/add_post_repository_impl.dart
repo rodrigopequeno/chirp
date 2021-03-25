@@ -1,8 +1,9 @@
-import 'package:chirp/app/features/add_post/data/datasources/add_post_data_source.dart';
-import 'package:chirp/app/core/error/failure.dart';
-import 'package:chirp/app/features/add_post/data/models/add_post_model.dart';
-import 'package:chirp/app/features/add_post/domain/repositories/add_post_repository.dart';
 import 'package:dartz/dartz.dart';
+
+import '../../../../core/error/failure.dart';
+import '../../domain/repositories/add_post_repository.dart';
+import '../datasources/add_post_data_source.dart';
+import '../models/add_post_model.dart';
 
 class AddPostRepositoryImpl implements AddPostRepository {
   final AddPostDataSource addPostDataSource;

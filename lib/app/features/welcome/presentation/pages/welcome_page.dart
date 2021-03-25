@@ -1,9 +1,10 @@
-import 'package:chirp/app/core/widgets/loading_indicator/loading_indicator_widget.dart';
-import 'package:chirp/app/features/welcome/presentation/cubit/welcome_cubit.dart';
+import 'package:asuka/asuka.dart' as asuka;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
-import 'package:asuka/asuka.dart' as asuka;
+
+import '../../../../core/widgets/loading_indicator/loading_indicator_widget.dart';
+import '../cubit/welcome_cubit.dart';
 
 class WelcomePage extends StatefulWidget {
   const WelcomePage({Key? key}) : super(key: key);
@@ -72,7 +73,7 @@ class _WelcomePageState extends State<WelcomePage> {
               onPressed: () async => await context
                   .read<WelcomeCubit>()
                   .signIn(nameController.text),
-              child: const Text('ENTRAR'),
+              child: const Text('ENTER'),
             ),
           ],
         );

@@ -1,5 +1,4 @@
-import 'package:chirp/app/core/entities/post.dart';
-
+import '../../../../core/entities/post.dart';
 import 'add_author.dart';
 
 class AddPost extends Post {

@@ -1,11 +1,11 @@
 import 'dart:async';
 
-import 'package:chirp/app/core/utils/constants.dart';
-import 'package:chirp/app/features/posts/data/models/author_model.dart';
-import 'package:chirp/app/features/posts/data/models/post_model.dart';
 import 'package:hive/hive.dart';
 
 import '../../../../core/error/exceptions.dart';
+import '../../../../core/utils/constants.dart';
+import '../models/author_model.dart';
+import '../models/post_model.dart';
 
 abstract class PostsLocalDataSource {
   Future<List<PostModel>> getPosts();

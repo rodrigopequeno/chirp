@@ -1,11 +1,11 @@
-import 'package:chirp/app/features/add_post/data/datasources/add_post_data_source.dart';
-import 'package:chirp/app/features/add_post/domain/repositories/add_post_repository.dart';
-import 'package:chirp/app/features/add_post/domain/usecases/create_post.dart';
-import 'package:chirp/app/features/add_post/presentation/cubit/add_post_cubit.dart';
 import 'package:get/get.dart';
 import 'package:get/get_instance/src/bindings_interface.dart';
 
+import 'data/datasources/add_post_data_source.dart';
 import 'data/repositories/add_post_repository_impl.dart';
+import 'domain/repositories/add_post_repository.dart';
+import 'domain/usecases/create_post.dart';
+import 'presentation/cubit/add_post_cubit.dart';
 
 class AddPostBindings implements Bindings {
   static void export() {}

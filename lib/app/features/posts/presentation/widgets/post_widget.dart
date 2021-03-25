@@ -1,6 +1,7 @@
-import 'package:chirp/app/core/entities/post.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+
+import '../../../../core/entities/post.dart';
 
 class PostWidget extends StatelessWidget {
   final Post post;

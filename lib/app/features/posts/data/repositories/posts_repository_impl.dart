@@ -1,13 +1,13 @@
-import 'package:chirp/app/core/error/exceptions.dart';
-import 'package:chirp/app/core/network/network_info.dart';
-import 'package:chirp/app/core/utils/character_limit.dart';
-import 'package:chirp/app/features/posts/data/models/post_model.dart';
 import 'package:dartz/dartz.dart';
 
-import 'package:chirp/app/core/error/failure.dart';
-import 'package:chirp/app/features/posts/data/datasources/posts_local_data_source.dart';
-import 'package:chirp/app/features/posts/data/datasources/posts_remote_data_source.dart';
-import 'package:chirp/app/features/posts/domain/repositories/posts_repository.dart';
+import '../../../../core/error/exceptions.dart';
+import '../../../../core/error/failure.dart';
+import '../../../../core/network/network_info.dart';
+import '../../../../core/utils/character_limit.dart';
+import '../../domain/repositories/posts_repository.dart';
+import '../datasources/posts_local_data_source.dart';
+import '../datasources/posts_remote_data_source.dart';
+import '../models/post_model.dart';
 
 class PostsRepositoryImpl extends PostsRepository {
   PostsRemoteDataSource remoteDataSource;

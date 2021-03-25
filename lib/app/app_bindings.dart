@@ -1,14 +1,14 @@
-import 'package:chirp/app/core/cubit/auth_cubit.dart';
-import 'package:chirp/app/core/utils/character_limit.dart';
-import 'package:chirp/app/core/utils/uuid_generator.dart';
-import 'package:chirp/app/features/welcome/welcome_bindings.dart';
 import 'package:dio/dio.dart';
 import 'package:get/instance_manager.dart';
 import 'package:hive/hive.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:uuid/uuid.dart';
 
+import 'core/cubit/auth_cubit.dart';
 import 'core/network/network_info.dart';
+import 'core/utils/character_limit.dart';
+import 'core/utils/uuid_generator.dart';
+import 'features/welcome/welcome_bindings.dart';
 
 class AppBindings implements Bindings {
   @override

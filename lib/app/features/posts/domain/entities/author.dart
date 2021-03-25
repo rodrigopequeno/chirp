@@ -1,4 +1,4 @@
-import 'package:chirp/app/core/entities/author.dart';
+import '../../../../core/entities/author.dart';
 
 class ListingAuthor extends Author {
   const ListingAuthor({

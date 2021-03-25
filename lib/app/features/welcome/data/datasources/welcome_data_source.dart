@@ -1,8 +1,9 @@
-import 'package:chirp/app/core/error/exceptions.dart';
-import 'package:chirp/app/core/utils/uuid_generator.dart';
-import 'package:chirp/app/features/welcome/data/models/user_model.dart';
-import 'package:chirp/app/features/welcome/domain/entities/logged_user.dart';
 import 'package:hive/hive.dart';
+
+import '../../../../core/error/exceptions.dart';
+import '../../../../core/utils/uuid_generator.dart';
+import '../../domain/entities/logged_user.dart';
+import '../models/user_model.dart';
 
 abstract class WelcomeDataSource {
   Future<UserModel> signInWithName({required String name});

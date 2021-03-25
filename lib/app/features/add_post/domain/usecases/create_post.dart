@@ -1,9 +1,10 @@
-import 'package:chirp/app/core/error/failure.dart';
-import 'package:chirp/app/core/usecases/usecase.dart';
-import 'package:chirp/app/features/add_post/data/models/add_post_model.dart';
-import 'package:chirp/app/features/add_post/domain/repositories/add_post_repository.dart';
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
+
+import '../../../../core/error/failure.dart';
+import '../../../../core/usecases/usecase.dart';
+import '../../data/models/add_post_model.dart';
+import '../repositories/add_post_repository.dart';
 
 class CreatePost implements UseCase<void, Params> {
   final AddPostRepository repository;
