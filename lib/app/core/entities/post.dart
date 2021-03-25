@@ -1,7 +1,7 @@
-import 'package:chirp/app/features/posts/domain/entities/author.dart';
+import 'package:chirp/app/core/entities/author.dart';
 import 'package:equatable/equatable.dart';
 
-class Post extends Equatable {
+abstract class Post extends Equatable {
   final String id;
   final Author author;
   final DateTime published;

@@ -1,13 +1,10 @@
-import 'package:equatable/equatable.dart';
+import 'package:chirp/app/core/entities/author.dart';
 
-class AddAuthor extends Equatable {
-  final String id;
-  final String authorName;
-
+class AddAuthor extends Author {
   const AddAuthor({
-    required this.id,
-    required this.authorName,
-  });
+    required String id,
+    required String authorName,
+  }) : super(authorName: authorName, id: id);
 
   @override
   List<Object?> get props => [id, authorName];

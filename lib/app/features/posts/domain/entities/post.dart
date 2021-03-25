@@ -1,11 +1,10 @@
+import 'package:chirp/app/core/entities/author.dart';
 import 'package:chirp/app/core/entities/post.dart';
 
-import 'add_author.dart';
-
-class AddPost extends Post {
-  const AddPost({
+class ListingPost extends Post {
+  const ListingPost({
     required String id,
-    required AddAuthor author,
+    required Author author,
     required DateTime published,
     required String content,
   }) : super(author: author, content: content, id: id, published: published);

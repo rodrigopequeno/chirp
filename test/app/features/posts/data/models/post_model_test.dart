@@ -1,8 +1,8 @@
 import 'dart:convert';
 
+import 'package:chirp/app/core/entities/post.dart';
 import 'package:chirp/app/features/posts/data/models/author_model.dart';
 import 'package:chirp/app/features/posts/data/models/post_model.dart';
-import 'package:chirp/app/features/posts/domain/entities/posts.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import '../../../../../fixtures/fixture_reader.dart';

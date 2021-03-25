@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
+import 'package:chirp/app/core/entities/post.dart';
 import 'package:chirp/app/core/error/failure.dart';
 import 'package:chirp/app/core/usecases/usecase.dart';
-import 'package:chirp/app/features/posts/domain/entities/posts.dart';
 import 'package:chirp/app/features/posts/domain/usecases/get_all_posts.dart';
 import 'package:equatable/equatable.dart';
 

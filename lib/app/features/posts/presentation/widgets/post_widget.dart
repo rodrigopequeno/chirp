@@ -1,4 +1,4 @@
-import 'package:chirp/app/features/posts/domain/entities/posts.dart';
+import 'package:chirp/app/core/entities/post.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 

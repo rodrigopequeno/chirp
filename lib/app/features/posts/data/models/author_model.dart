@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:chirp/app/features/posts/domain/entities/author.dart';
+import 'package:chirp/app/core/entities/author.dart';
 import 'package:hive/hive.dart';
 
 class AuthorModel extends Author {
