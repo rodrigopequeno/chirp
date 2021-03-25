@@ -1,3 +1,4 @@
+import 'package:chirp/app/features/add_post/presentation/pages/add_post_page.dart';
 import 'package:chirp/app/features/posts/posts_bindings.dart';
 import 'package:chirp/app/features/posts/presentation/pages/posts_page.dart';
 import 'package:chirp/app/features/welcome/presentation/pages/welcome_page.dart';
@@ -10,6 +11,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:asuka/asuka.dart' as asuka;
 
 import 'app/app_bindings.dart';
+import 'app/features/add_post/add_post_bindings.dart';
 
 Future<void> main() async {
   await Hive.initFlutter();
@@ -29,6 +31,11 @@ Future<void> main() async {
           name: '/posts',
           page: () => const PostsPage(),
           binding: PostsBinding(),
+        ),
+        GetPage(
+          name: '/add-post',
+          page: () => AddPostPage(),
+          binding: AddPostBindings(),
         ),
       ],
     ),

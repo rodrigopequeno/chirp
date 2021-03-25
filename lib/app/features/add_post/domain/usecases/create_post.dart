@@ -11,7 +11,7 @@ class CreatePost implements UseCase<void, Params> {
   CreatePost(this.repository);
 
   @override
-  Future<Either<Failure, void>> call(Params params) async {
+  Future<Either<Failure, Unit>> call(Params params) async {
     return await repository.addPost(params.addPost);
   }
 }

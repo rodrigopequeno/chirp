@@ -19,8 +19,12 @@ class PostsLocalDataSourceImpl implements PostsLocalDataSource {
   final HiveInterface hive;
 
   PostsLocalDataSourceImpl({required this.hive}) {
-    hive.registerAdapter<PostModel>(PostModelAdapter());
-    hive.registerAdapter<AuthorModel>(AuthorModelAdapter());
+    if (!hive.isAdapterRegistered(PostModelAdapter().typeId)) {
+      hive.registerAdapter<PostModel>(PostModelAdapter());
+    }
+    if (!hive.isAdapterRegistered(AuthorModelAdapter().typeId)) {
+      hive.registerAdapter<AuthorModel>(AuthorModelAdapter());
+    }
   }
 
   @override

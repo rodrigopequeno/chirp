@@ -1,10 +1,11 @@
+import 'package:chirp/app/core/cubit/auth_cubit.dart';
 import 'package:chirp/app/features/posts/presentation/cubit/posts_cubit.dart';
 import 'package:chirp/app/features/posts/presentation/widgets/post_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:asuka/asuka.dart' as asuka;
-import 'package:get/instance_manager.dart';
+import 'package:get/get.dart';
 
 class PostsPage extends StatelessWidget {
   const PostsPage({Key? key}) : super(key: key);
@@ -18,7 +19,10 @@ class PostsPage extends StatelessWidget {
         actions: [
           IconButton(
             icon: const Icon(Icons.logout),
-            onPressed: () {},
+            onPressed: () async {
+              await Get.find<AuthCubit>().logout();
+              Get.offAllNamed('/');
+            },
           ),
         ],
       ),
@@ -90,7 +94,7 @@ class PostsPage extends StatelessWidget {
   Widget _floatingActionButton() {
     return FloatingActionButton(
       onPressed: () {
-        debugPrint("add");
+        Get.toNamed("/add-post");
       },
       child: const Icon(Icons.add),
     );

@@ -14,13 +14,13 @@ class AppBindings implements Bindings {
   @override
   void dependencies() {
     Get.put<HiveInterface>(Hive);
-    Get.put(const Uuid());
-    Get.put<UuidGenerator>(UuidGeneratorImpl(Get.find()));
+    Get.put(const Uuid(), permanent: true);
+    Get.put<UuidGenerator>(UuidGeneratorImpl(Get.find()), permanent: true);
     WelcomeBinding.export();
     Get.put(AuthCubit(Get.find(), Get.find()), permanent: true);
-    Get.lazyPut(() => Dio());
-    Get.lazyPut(() => InternetConnectionChecker());
-    Get.lazyPut<NetworkInfo>(() => NetworkInfoImpl(Get.find()));
-    Get.lazyPut(() => CharacterLimit());
+    Get.lazyPut(() => Dio(), fenix: true);
+    Get.lazyPut(() => InternetConnectionChecker(), fenix: true);
+    Get.lazyPut<NetworkInfo>(() => NetworkInfoImpl(Get.find()), fenix: true);
+    Get.lazyPut(() => CharacterLimit(), fenix: true);
   }
 }

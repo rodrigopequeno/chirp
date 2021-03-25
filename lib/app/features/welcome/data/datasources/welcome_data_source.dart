@@ -17,7 +17,9 @@ class WelcomeDataSourceImpl implements WelcomeDataSource {
   final UuidGenerator uuid;
 
   WelcomeDataSourceImpl(this.hive, this.uuid) {
-    hive.registerAdapter<UserModel>(UserModelAdapter());
+    if (!hive.isAdapterRegistered(UserModelAdapter().typeId)) {
+      hive.registerAdapter<UserModel>(UserModelAdapter());
+    }
   }
 
   @override
@@ -45,7 +47,7 @@ class WelcomeDataSourceImpl implements WelcomeDataSource {
   @override
   Future<void> signOut() async {
     final box = await _openBox(kBoxUserInfo);
-    box.clear();
+    await box.clear();
   }
 
   Future<Box> _openBox(String type) async {

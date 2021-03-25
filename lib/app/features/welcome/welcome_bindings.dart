@@ -28,7 +28,6 @@ class WelcomeBinding implements Bindings {
 
   @override
   void dependencies() {
-    export();
     // Bloc
     Get.create(() => WelcomeCubit(Get.find(), Get.find()));
 

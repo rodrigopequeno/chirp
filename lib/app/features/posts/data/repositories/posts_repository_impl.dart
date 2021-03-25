@@ -33,7 +33,7 @@ class PostsRepositoryImpl extends PostsRepository {
             .toList();
         localDataSource.cachePosts(postsFilteredByCharacterLimit);
         final localPostsSave = await localDataSource.getPosts();
-        return Right(localPostsSave + remotePosts);
+        return Right(localPostsSave + postsFilteredByCharacterLimit);
       } on ServerException {
         return Left(ServerFailure());
       }
