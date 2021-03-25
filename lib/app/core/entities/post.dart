@@ -2,7 +2,7 @@ import 'package:equatable/equatable.dart';
 
 import 'author.dart';
 
-abstract class Post extends Equatable {
+class Post extends Equatable {
   final String id;
   final Author author;
   final DateTime published;

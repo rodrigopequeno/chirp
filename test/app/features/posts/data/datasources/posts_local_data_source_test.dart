@@ -15,22 +15,24 @@ void main() {
   late MockHiveInterface mockHiveInterface;
   late MockBox mockHiveBox;
 
-  final dateTime = DateTime(2021, 03, 23, 09, 24, 01);
-  const author = AuthorModel(
+  final tDateTime = DateTime(2021, 03, 23, 09, 24, 01);
+  const tAuthor = AuthorModel(
       id: "75418de8-cf36-47c6-8850-3f958fb1b45d",
       authorName: "Rodrigo Pequeno");
   final tPosts = [
     PostModel(
       id: '0',
-      author: author,
-      published: dateTime,
-      content: 'Olá',
+      author: tAuthor,
+      published: tDateTime,
+      content: 'Hello',
     )
   ];
 
   setUp(() {
     mockHiveInterface = MockHiveInterface();
     mockHiveBox = MockBox();
+    when(() => mockHiveInterface.isAdapterRegistered(any())).thenReturn(false);
+
     dataSourceImpl = PostsLocalDataSourceImpl(hive: mockHiveInterface);
   });
 
@@ -38,6 +40,7 @@ void main() {
     test('''should return Posts from Hive whe there in the cache''', () async {
       when(() => mockHiveInterface.openBox(any()))
           .thenAnswer((_) async => mockHiveBox);
+
       when(() => mockHiveBox.get(any())).thenReturn(tPosts);
       final result = await dataSourceImpl.getCachePosts();
       verify(() => mockHiveBox.get(kCachedPosts));

@@ -19,6 +19,17 @@ class PostModel extends Post {
           id: id,
         );
 
+  PostModel copyWith({
+    String? content,
+  }) {
+    return PostModel(
+      id: id,
+      author: author,
+      published: published,
+      content: content ?? this.content,
+    );
+  }
+
   Map<String, dynamic> toMap() {
     final Map<String, dynamic> postMap = {
       'ID': id,

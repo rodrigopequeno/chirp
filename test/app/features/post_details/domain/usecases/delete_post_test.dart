@@ -17,7 +17,7 @@ void main() {
 
   const tUid = "uid";
 
-  test('should edit post from the repository', () async {
+  test('should delete post from the repository', () async {
     when(() => mockPostDetailsRepository.deletePost(any()))
         .thenAnswer((_) async => const Right(unit));
 
