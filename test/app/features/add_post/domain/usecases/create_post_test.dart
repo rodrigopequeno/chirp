@@ -1,5 +1,5 @@
+import 'package:chirp/app/features/add_post/data/models/add_post_model.dart';
 import 'package:chirp/app/features/add_post/domain/entities/add_author.dart';
-import 'package:chirp/app/features/add_post/domain/entities/add_post.dart';
 import 'package:chirp/app/features/add_post/domain/repositories/add_post_repository.dart';
 import 'package:chirp/app/features/add_post/domain/usecases/create_post.dart';
 import 'package:dartz/dartz.dart';
@@ -15,7 +15,7 @@ void main() {
   const author = AddAuthor(
       id: "75418de8-cf36-47c6-8850-3f958fb1b45d",
       authorName: "Rodrigo Pequeno");
-  final tPost = AddPost(
+  final tPost = AddPostModel(
     id: '0',
     author: author,
     content: "Seja bem vindo",
@@ -23,7 +23,7 @@ void main() {
   );
 
   setUpAll(() {
-    registerFallbackValue<AddPost>(tPost);
+    registerFallbackValue<AddPostModel>(tPost);
   });
 
   setUp(() {
@@ -31,13 +31,13 @@ void main() {
     usecase = CreatePost(mockAddPostRepository);
   });
 
-  test('should get all posts from the repository', () async {
+  test('should create post from the repository', () async {
     when(() => mockAddPostRepository.addPost(any()))
-        .thenAnswer((_) async => Right(tPost));
+        .thenAnswer((_) async => const Right(unit));
 
     final result = await usecase(Params(tPost));
 
-    expect(result, Right(tPost));
+    expect(result, const Right(unit));
     verify(() => mockAddPostRepository.addPost(tPost));
     verifyNoMoreInteractions(mockAddPostRepository);
   });

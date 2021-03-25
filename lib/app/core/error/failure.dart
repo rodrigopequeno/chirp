@@ -16,3 +16,5 @@ class UserNotLoggedInFailure extends Failure {}
 class ServerFailure extends Failure {}
 
 class NotFoundPostsCachedFailure extends Failure {}
+
+class SavePostFailure extends Failure {}
