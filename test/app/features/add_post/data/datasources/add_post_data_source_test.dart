@@ -1,6 +1,6 @@
+import 'package:chirp/app/core/entities/author.dart';
+import 'package:chirp/app/core/models/post_model.dart';
 import 'package:chirp/app/features/add_post/data/datasources/add_post_data_source.dart';
-import 'package:chirp/app/features/add_post/data/models/add_post_model.dart';
-import 'package:chirp/app/features/add_post/domain/entities/add_author.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hive/hive.dart';
 import 'package:mocktail/mocktail.dart';
@@ -22,10 +22,10 @@ void main() {
         .thenAnswer((_) async => mockHiveBox);
   });
 
-  const author = AddAuthor(
+  const author = Author(
       id: "75418de8-cf36-47c6-8850-3f958fb1b45d",
       authorName: "Rodrigo Pequeno");
-  final tPost = AddPostModel(
+  final tPost = PostModel(
     id: '0',
     author: author,
     content: "Seja bem vindo",

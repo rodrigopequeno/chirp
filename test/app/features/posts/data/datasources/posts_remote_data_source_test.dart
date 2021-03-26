@@ -1,8 +1,8 @@
 import 'dart:convert';
 
 import 'package:chirp/app/core/error/exceptions.dart';
+import 'package:chirp/app/core/models/post_model.dart';
 import 'package:chirp/app/features/posts/data/datasources/posts_remote_data_source.dart';
-import 'package:chirp/app/features/posts/data/models/post_model.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';

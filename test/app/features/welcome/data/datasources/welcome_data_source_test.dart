@@ -26,6 +26,8 @@ void main() {
     mockHiveInterface = MockHiveInterface();
     mockHiveBox = MockBox();
     mockUuidGenerator = MockUuidGenerator();
+    when(() => mockHiveInterface.isAdapterRegistered(any())).thenReturn(false);
+
     welcomeDataSourceImpl =
         WelcomeDataSourceImpl(mockHiveInterface, mockUuidGenerator);
     when(() => mockUuidGenerator.generated).thenReturn(tUuid);

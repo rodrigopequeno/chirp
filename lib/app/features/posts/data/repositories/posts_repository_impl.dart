@@ -2,12 +2,12 @@ import 'package:dartz/dartz.dart';
 
 import '../../../../core/error/exceptions.dart';
 import '../../../../core/error/failure.dart';
+import '../../../../core/models/post_model.dart';
 import '../../../../core/network/network_info.dart';
 import '../../../../core/utils/character_limit.dart';
 import '../../domain/repositories/posts_repository.dart';
 import '../datasources/posts_local_data_source.dart';
 import '../datasources/posts_remote_data_source.dart';
-import '../models/post_model.dart';
 
 class PostsRepositoryImpl extends PostsRepository {
   PostsRemoteDataSource remoteDataSource;
@@ -28,8 +28,8 @@ class PostsRepositoryImpl extends PostsRepository {
       try {
         final remotePosts = await remoteDataSource.getAllPosts();
         final postsFilteredByCharacterLimit = remotePosts
-            .where(
-                (element) => characterLimit.isWithinTheLimit(element.content))
+            .where((element) =>
+                characterLimit.isWithinTheLimitPreview(element.content))
             .toList();
         localDataSource.cachePosts(postsFilteredByCharacterLimit);
         final localPostsSave = await localDataSource.getPosts();

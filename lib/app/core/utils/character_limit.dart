@@ -1,7 +1,12 @@
-const kCharacterLimit = 280;
+const kCharacterLimitCreation = 380;
+const kCharacterLimitPreview = 280;
 
 class CharacterLimit {
-  bool isWithinTheLimit(String characters) {
-    return characters.length <= kCharacterLimit;
+  bool isWithinTheLimitCreation(String characters) {
+    return characters.length <= kCharacterLimitCreation;
+  }
+
+  bool isWithinTheLimitPreview(String characters) {
+    return characters.length <= kCharacterLimitPreview;
   }
 }

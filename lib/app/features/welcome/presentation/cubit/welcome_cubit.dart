@@ -17,7 +17,7 @@ class WelcomeCubit extends Cubit<WelcomeState> {
 
   Future<void> init() async {
     await Future.wait([
-      Future.delayed(const Duration(milliseconds: 2000)),
+      Future.delayed(const Duration(milliseconds: 4000)),
       auth.checkSignIn()
     ]);
     if (auth.state is AuthLogged) {

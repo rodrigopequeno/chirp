@@ -8,20 +8,40 @@ void main() {
     characterLimit = CharacterLimit();
   });
 
-  group('isWithinTheLimit', () {
+  group('isWithinTheLimitCreation', () {
     test(
-        '''should return true when the string is less than the kCharacterLimit''',
+        '''should return true when the string is less than the kCharacterLimitCreation''',
         () async {
-      final str = List.generate(kCharacterLimit, (index) => "#").join();
-      final result = characterLimit.isWithinTheLimit(str);
+      final str = List.generate(kCharacterLimitCreation, (index) => "#").join();
+      final result = characterLimit.isWithinTheLimitCreation(str);
       expect(result, true);
     });
 
     test(
-        '''should return false when the string is greater than the kCharacterLimit''',
+        '''should return false when the string is greater than the kCharacterLimitCreation''',
         () async {
-      final str = List.generate(kCharacterLimit + 1, (index) => "#").join();
-      final result = characterLimit.isWithinTheLimit(str);
+      final str =
+          List.generate(kCharacterLimitCreation + 1, (index) => "#").join();
+      final result = characterLimit.isWithinTheLimitCreation(str);
+      expect(result, false);
+    });
+  });
+
+  group('isWithinTheLimit', () {
+    test(
+        '''should return true when the string is less than the kCharacterLimitPreview''',
+        () async {
+      final str = List.generate(kCharacterLimitPreview, (index) => "#").join();
+      final result = characterLimit.isWithinTheLimitPreview(str);
+      expect(result, true);
+    });
+
+    test(
+        '''should return false when the string is greater than the kCharacterLimitPreview''',
+        () async {
+      final str =
+          List.generate(kCharacterLimitPreview + 1, (index) => "#").join();
+      final result = characterLimit.isWithinTheLimitPreview(str);
       expect(result, false);
     });
   });

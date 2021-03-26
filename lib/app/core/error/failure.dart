@@ -18,3 +18,9 @@ class ServerFailure extends Failure {}
 class NotFoundPostsCachedFailure extends Failure {}
 
 class SavePostFailure extends Failure {}
+
+class NotFoundPostFailure extends Failure {}
+
+class DeletePostFailure extends Failure {}
+
+class EditPostFailure extends Failure {}

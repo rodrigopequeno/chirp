@@ -1,16 +1,17 @@
 import 'package:bloc/bloc.dart';
+import 'package:chirp/app/core/models/author_model.dart';
+import 'package:chirp/app/core/models/post_model.dart';
 import 'package:equatable/equatable.dart';
 
 import '../../../../core/cubit/auth_cubit.dart';
 import '../../../../core/utils/character_limit.dart';
 import '../../../../core/utils/uuid_generator.dart';
-import '../../data/models/add_author_model.dart';
-import '../../data/models/add_post_model.dart';
 import '../../domain/usecases/create_post.dart';
 
 part 'add_post_state.dart';
 
-const kIsOutOfLimitFailureMessage = "The limit is 280 characters";
+const kIsOutOfLimitFailureMessage =
+    "The limit is $kCharacterLimitCreation characters";
 const kDefaultFailureMessage = "An error occurred, please try again later";
 
 class AddPostCubit extends Cubit<AddPostState> {
@@ -24,18 +25,20 @@ class AddPostCubit extends Cubit<AddPostState> {
       : super(AddPostInitial());
 
   Future<void> addPost(String content) async {
-    final isWithinTheLimit = characterLimit.isWithinTheLimit(content);
-    if (!isWithinTheLimit) {
+    final isWithinTheLimitCreation =
+        characterLimit.isWithinTheLimitCreation(content);
+    if (!isWithinTheLimitCreation) {
       emit(AddPostError(kIsOutOfLimitFailureMessage));
     } else {
       emit(AddPostLoading());
       await Future<void>.delayed(const Duration(seconds: 1));
       final logged = authCubit.state as AuthLogged;
-      final author = AddAuthorModel(
+      final author = AuthorModel(
         id: logged.user.uid,
         authorName: logged.user.name,
+        image: logged.user.image,
       );
-      final post = AddPostModel(
+      final post = PostModel(
           id: uuidGenerator.generated,
           author: author,
           published: DateTime.now(),

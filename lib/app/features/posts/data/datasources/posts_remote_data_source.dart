@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 
 import '../../../../core/error/exceptions.dart';
-import '../models/post_model.dart';
+import '../../../../core/models/post_model.dart';
 
 abstract class PostsRemoteDataSource {
   Future<List<PostModel>> getAllPosts();

@@ -1,9 +1,9 @@
+import 'package:chirp/app/core/models/post_model.dart';
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 
 import '../../../../core/error/failure.dart';
 import '../../../../core/usecases/usecase.dart';
-import '../../data/models/add_post_model.dart';
 import '../repositories/add_post_repository.dart';
 
 class CreatePost implements UseCase<void, Params> {
@@ -18,7 +18,7 @@ class CreatePost implements UseCase<void, Params> {
 }
 
 class Params extends Equatable {
-  final AddPostModel addPost;
+  final PostModel addPost;
 
   const Params(this.addPost);
 

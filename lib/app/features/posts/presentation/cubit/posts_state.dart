@@ -6,7 +6,7 @@ abstract class PostsState extends Equatable {
   const PostsState([this.properties = const <dynamic>[]]);
 
   @override
-  List<Object> get props => [];
+  List<Object> get props => [properties];
 }
 
 class PostsInitial extends PostsState {}

@@ -1,7 +1,7 @@
 import 'package:chirp/app/core/error/exceptions.dart';
+import 'package:chirp/app/core/models/author_model.dart';
+import 'package:chirp/app/core/models/post_model.dart';
 import 'package:chirp/app/features/posts/data/datasources/posts_local_data_source.dart';
-import 'package:chirp/app/features/posts/data/models/author_model.dart';
-import 'package:chirp/app/features/posts/data/models/post_model.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hive/hive.dart';
 import 'package:mocktail/mocktail.dart';
@@ -15,22 +15,25 @@ void main() {
   late MockHiveInterface mockHiveInterface;
   late MockBox mockHiveBox;
 
-  final dateTime = DateTime(2021, 03, 23, 09, 24, 01);
-  const author = AuthorModel(
+  final tDateTime = DateTime(2021, 03, 23, 09, 24, 01);
+  const tAuthor = AuthorModel(
       id: "75418de8-cf36-47c6-8850-3f958fb1b45d",
-      authorName: "Rodrigo Pequeno");
+      authorName: "Rodrigo Pequeno",
+      image: "https://randomuser.me/api/portraits/men/1.jpg");
   final tPosts = [
     PostModel(
       id: '0',
-      author: author,
-      published: dateTime,
-      content: 'Olá',
+      author: tAuthor,
+      published: tDateTime,
+      content: 'Hello',
     )
   ];
 
   setUp(() {
     mockHiveInterface = MockHiveInterface();
     mockHiveBox = MockBox();
+    when(() => mockHiveInterface.isAdapterRegistered(any())).thenReturn(false);
+
     dataSourceImpl = PostsLocalDataSourceImpl(hive: mockHiveInterface);
   });
 
@@ -38,6 +41,7 @@ void main() {
     test('''should return Posts from Hive whe there in the cache''', () async {
       when(() => mockHiveInterface.openBox(any()))
           .thenAnswer((_) async => mockHiveBox);
+
       when(() => mockHiveBox.get(any())).thenReturn(tPosts);
       final result = await dataSourceImpl.getCachePosts();
       verify(() => mockHiveBox.get(kCachedPosts));

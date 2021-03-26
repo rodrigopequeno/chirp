@@ -6,7 +6,7 @@ abstract class WelcomeState extends Equatable {
   const WelcomeState([this.properties = const <dynamic>[]]);
 
   @override
-  List<Object> get props => [];
+  List<Object> get props => [properties];
 }
 
 class WelcomeLoadingInitial extends WelcomeState {}

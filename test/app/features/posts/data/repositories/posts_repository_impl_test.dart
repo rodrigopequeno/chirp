@@ -1,11 +1,11 @@
 import 'package:chirp/app/core/error/exceptions.dart';
 import 'package:chirp/app/core/error/failure.dart';
+import 'package:chirp/app/core/models/author_model.dart';
+import 'package:chirp/app/core/models/post_model.dart';
 import 'package:chirp/app/core/network/network_info.dart';
 import 'package:chirp/app/core/utils/character_limit.dart';
 import 'package:chirp/app/features/posts/data/datasources/posts_local_data_source.dart';
 import 'package:chirp/app/features/posts/data/datasources/posts_remote_data_source.dart';
-import 'package:chirp/app/features/posts/data/models/author_model.dart';
-import 'package:chirp/app/features/posts/data/models/post_model.dart';
 import 'package:chirp/app/features/posts/data/repositories/posts_repository_impl.dart';
 import 'package:chirp/app/features/posts/domain/repositories/posts_repository.dart';
 import 'package:dartz/dartz.dart';
@@ -68,16 +68,17 @@ void main() {
   }
 
   group('getAllPosts', () {
-    final dateTime = DateTime(2021, 03, 23, 09, 24, 01);
-    const author = AuthorModel(
+    final tDateTime = DateTime(2021, 03, 23, 09, 24, 01);
+    const tAuthor = AuthorModel(
         id: "75418de8-cf36-47c6-8850-3f958fb1b45d",
-        authorName: "Rodrigo Pequeno");
+        authorName: "Rodrigo Pequeno",
+        image: "https://randomuser.me/api/portraits/men/1.jpg");
     final tPosts = [
       PostModel(
-        id: '0',
-        author: author,
-        published: dateTime,
-        content: 'Olá',
+        id: '2e9bf094-e494-4e22-ba10-dcf07ebfd18d',
+        author: tAuthor,
+        published: tDateTime,
+        content: 'Hello',
       )
     ];
     test('should check if the device is online', () async {
@@ -85,7 +86,8 @@ void main() {
           .thenAnswer((_) async => tPosts);
       when(() => mockLocalDataSource.getPosts()).thenAnswer((_) async => []);
       when(() => mockNetworkInfo.isConnected).thenAnswer((_) async => true);
-      when(() => mockCharacterLimit.isWithinTheLimit(any())).thenReturn(true);
+      when(() => mockCharacterLimit.isWithinTheLimitPreview(any()))
+          .thenReturn(true);
       repositoryImpl.getAllPosts();
       verify(() => mockNetworkInfo.isConnected);
     });
@@ -97,7 +99,8 @@ void main() {
         when(() => mockRemoteDataSource.getAllPosts())
             .thenAnswer((_) async => tPosts);
         when(() => mockLocalDataSource.getPosts()).thenAnswer((_) async => []);
-        when(() => mockCharacterLimit.isWithinTheLimit(any())).thenReturn(true);
+        when(() => mockCharacterLimit.isWithinTheLimitPreview(any()))
+            .thenReturn(true);
         final result = await repositoryImpl.getAllPosts();
         verify(() => mockRemoteDataSource.getAllPosts());
         expect(result, isA<Right<dynamic, List<PostModel>>>());
@@ -109,7 +112,8 @@ should cache the data locally when the call to remote data source is successful'
         when(() => mockRemoteDataSource.getAllPosts())
             .thenAnswer((_) async => tPosts);
         when(() => mockLocalDataSource.getPosts()).thenAnswer((_) async => []);
-        when(() => mockCharacterLimit.isWithinTheLimit(any())).thenReturn(true);
+        when(() => mockCharacterLimit.isWithinTheLimitPreview(any()))
+            .thenReturn(true);
         await repositoryImpl.getAllPosts();
         verify(() => mockRemoteDataSource.getAllPosts());
         verify(() => mockLocalDataSource.cachePosts(tPosts));
