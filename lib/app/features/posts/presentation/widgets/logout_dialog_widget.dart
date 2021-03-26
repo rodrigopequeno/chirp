@@ -18,7 +18,9 @@ class LogoutDialogWidget extends StatelessWidget {
       ),
       actions: [
         ButtonWidget(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pop(context);
+            },
             text: "CANCEL",
             colorButton: Theme.of(context).primaryColor),
         ButtonWidget(

@@ -3,19 +3,21 @@ import 'package:flutter/material.dart';
 import 'package:chirp/app/core/widgets/avatar/avatar_widget.dart';
 import 'package:chirp/app/core/widgets/spacers/spacers.dart';
 import 'package:chirp/app/features/welcome/domain/entities/logged_user.dart';
+import 'package:get/get.dart';
 
 class ScaffoldWidget extends StatelessWidget {
   final Widget body;
   final List<Widget> actions;
   final LoggedUser loggedUser;
+  final Future<bool> Function()? onWillPop;
   final Widget? floatingActionButton;
-
   const ScaffoldWidget({
     Key? key,
     required this.body,
     required this.loggedUser,
     this.actions = const <Widget>[],
     this.floatingActionButton,
+    this.onWillPop,
   }) : super(key: key);
 
   @override
@@ -50,12 +52,25 @@ class ScaffoldWidget extends StatelessWidget {
   }
 
   Widget _appBarInfo(BuildContext context) {
-    return Positioned(
+    return AnimatedPositioned(
       top: 40,
-      left: 30,
+      // ignore: invalid_use_of_protected_member
+      left: Get.routing.route?.hasActiveRouteBelow ?? false ? 10 : 30,
       right: 20,
+      duration: const Duration(milliseconds: 400),
       child: Row(
         children: [
+          Visibility(
+            // ignore: invalid_use_of_protected_member
+            visible: Get.routing.route?.hasActiveRouteBelow ?? false,
+            child: BackButton(onPressed: () async {
+              if (onWillPop == null) {
+                Get.back();
+              } else if (onWillPop != null && await onWillPop!()) {
+                Get.back();
+              }
+            }),
+          ),
           AvatarWidget(
             image: loggedUser.image,
             cor: Colors.white,
