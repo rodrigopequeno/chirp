@@ -1,6 +1,5 @@
 import 'package:chirp/app/core/utils/humanize_duration.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 import '../../entities/post.dart';
 import '../avatar/avatar_widget.dart';
@@ -39,13 +38,16 @@ class PostWidget extends StatelessWidget {
                     children: [
                       Text(
                         post.author.authorName,
-                        style: Theme.of(context).textTheme.bodyText1,
+                        style: Theme.of(context)
+                            .textTheme
+                            .bodyText1!
+                            .copyWith(fontWeight: FontWeight.bold),
                       ),
                       const SpacerH(2),
                       Text(
                         Humanize().differenceDateTimeNow(post.published),
-                        style: GoogleFonts.roboto(
-                          fontSize: 12,
+                        style: TextStyle(
+                          fontSize: 11,
                           color: Colors.grey[600],
                         ),
                       ),

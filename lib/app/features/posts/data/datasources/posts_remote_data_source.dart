@@ -15,7 +15,7 @@ class PostsRemoteDataSourceImpl implements PostsRemoteDataSource {
   Future<List<PostModel>> getAllPosts() async {
     try {
       final response =
-          await client.get('https://api.mocki.io/v1/7f811b6a/posts');
+          await client.get('https://api.mocki.io/v1/f932124c/posts');
       if (response.statusCode == 200) {
         return (response.data['Result'] as List)
             .map((e) => PostModel.fromMap(e as Map<String, dynamic>))

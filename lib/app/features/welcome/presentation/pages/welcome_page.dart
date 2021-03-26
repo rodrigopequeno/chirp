@@ -63,7 +63,7 @@ class _WelcomePageState extends State<WelcomePage> {
     return Center(
       child: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 20),
+          padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 30),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -73,7 +73,8 @@ class _WelcomePageState extends State<WelcomePage> {
                 child: SvgPicture.asset(
                   'assets/images/bird.svg',
                   semanticsLabel: 'CHIRP LOGO',
-                  height: MediaQuery.of(context).size.height * 0.35,
+                  height: 400,
+                  width: 400,
                 ),
               ),
               AnimatedContainer(
@@ -117,8 +118,8 @@ class _WelcomePageState extends State<WelcomePage> {
       key: _formKey,
       child: Column(
         children: <Widget>[
-          SizedBox(
-            width: MediaQuery.of(context).size.width * 0.8,
+          Container(
+            constraints: const BoxConstraints(maxWidth: 400),
             child: TextFieldWidget(
               controller: nameController,
               textInputAction: TextInputAction.done,

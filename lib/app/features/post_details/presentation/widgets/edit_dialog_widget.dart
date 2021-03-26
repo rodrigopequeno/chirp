@@ -1,4 +1,5 @@
 import 'package:chirp/app/core/widgets/button/button_widget.dart';
+import 'package:chirp/app/core/widgets/spacers/spacers.dart';
 import 'package:chirp/app/core/widgets/text_field.dart/text_field_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -69,9 +70,7 @@ class _EditDialogWidgetState extends State<EditDialogWidget> {
                       text: 'CANCEL',
                     ),
                   ),
-                  const SizedBox(
-                    width: 10,
-                  ),
+                  const SpacerW(10),
                   Expanded(
                     child: ButtonWidget(
                       onPressed: () {
