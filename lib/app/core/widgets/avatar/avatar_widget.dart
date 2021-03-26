@@ -33,7 +33,7 @@ class AvatarWidget extends StatelessWidget {
               boxShadow: const [
                 BoxShadow(
                   color: Color.fromRGBO(0, 0, 0, 0.25),
-                  offset: Offset(4, 4), //(x,y)
+                  offset: Offset(4, 4),
                   blurRadius: 6.0,
                 ),
               ],

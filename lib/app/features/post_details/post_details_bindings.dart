@@ -12,18 +12,13 @@ class PostDetailsBinding implements Bindings {
   @override
   void dependencies() {
     Get.create(() => PostDetailsCubit(Get.find(), Get.find()));
-    // Use cases
     Get.lazyPut(() => EditPost(Get.find()), fenix: true);
     Get.lazyPut(() => DeletePost(Get.find()), fenix: true);
-
-    // Repository
     Get.lazyPut<PostDetailsRepository>(
         () => PostDetailsRepositoryImpl(
               detailsDataSource: Get.find(),
             ),
         fenix: true);
-
-    // Data sources
     Get.lazyPut<PostDetailsDataSource>(
         () => PostDetailsDataSourceImpl(Get.find()),
         fenix: true);

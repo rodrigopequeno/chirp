@@ -9,7 +9,6 @@ void main() {
   test(
     'should be a subclass of LoggedUser entity',
     () async {
-      // assert
       expect(tUserModel, isA<LoggedUser>());
     },
   );

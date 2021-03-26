@@ -11,16 +11,11 @@ import 'presentation/cubit/welcome_cubit.dart';
 
 class WelcomeBinding implements Bindings {
   static void export() {
-    // Use cases
     Get.lazyPut(() => GetLoggedUser(Get.find()), fenix: true);
     Get.lazyPut(() => SignOut(Get.find()), fenix: true);
-
-    // Repository
     Get.lazyPut<WelcomeRepository>(
         () => WelcomeRepositoryImpl(welcomeDataSource: Get.find()),
         fenix: true);
-
-    // Data sources
     Get.lazyPut<WelcomeDataSource>(
         () => WelcomeDataSourceImpl(Get.find(), Get.find()),
         fenix: true);
@@ -28,10 +23,7 @@ class WelcomeBinding implements Bindings {
 
   @override
   void dependencies() {
-    // Bloc
     Get.create(() => WelcomeCubit(Get.find(), Get.find()));
-
-    // Use cases
     Get.lazyPut(() => SignInWithName(Get.find()), fenix: true);
   }
 }

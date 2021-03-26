@@ -27,13 +27,13 @@ class PostsRepositoryImpl extends PostsRepository {
     if (await networkInfo.isConnected) {
       try {
         final remotePosts = await remoteDataSource.getAllPosts();
-        final postsFilteredByCharacterLimit = remotePosts
+        localDataSource.cachePosts(remotePosts);
+        final localPostsSave = await localDataSource.getPosts();
+        final postsFilteredByCharacterLimit = (localPostsSave + remotePosts)
             .where((element) =>
                 characterLimit.isWithinTheLimitPreview(element.content))
             .toList();
-        localDataSource.cachePosts(postsFilteredByCharacterLimit);
-        final localPostsSave = await localDataSource.getPosts();
-        return Right(localPostsSave + postsFilteredByCharacterLimit);
+        return Right(postsFilteredByCharacterLimit);
       } on ServerException {
         return Left(ServerFailure());
       }

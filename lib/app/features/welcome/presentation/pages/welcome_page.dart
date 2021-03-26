@@ -60,6 +60,7 @@ class _WelcomePageState extends State<WelcomePage> {
 
   Widget _buildWelcome(WelcomeState state) {
     final visible = state is WelcomeLoadingInitial || state is WelcomeSuccess;
+    final height = MediaQuery.of(context).size.height * 0.4;
     return Center(
       child: SingleChildScrollView(
         child: Padding(
@@ -73,8 +74,8 @@ class _WelcomePageState extends State<WelcomePage> {
                 child: SvgPicture.asset(
                   'assets/images/bird.svg',
                   semanticsLabel: 'CHIRP LOGO',
-                  height: 400,
-                  width: 400,
+                  height: height,
+                  width: height,
                 ),
               ),
               AnimatedContainer(
@@ -82,7 +83,7 @@ class _WelcomePageState extends State<WelcomePage> {
                 curve: Curves.bounceIn,
                 child: Column(
                   children: [
-                    const SpacerH(80),
+                    const SpacerH(40),
                     Text(
                       "Welcome!",
                       style: Theme.of(context)

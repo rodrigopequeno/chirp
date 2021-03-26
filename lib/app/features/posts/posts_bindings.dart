@@ -9,18 +9,10 @@ import 'domain/usecases/get_all_posts.dart';
 import 'presentation/cubit/posts_cubit.dart';
 
 class PostsBinding implements Bindings {
-  static void export() {}
-
   @override
   void dependencies() {
-    export();
-    // Bloc
     Get.create(() => PostsCubit(Get.find()));
-
-    // Use cases
     Get.lazyPut(() => GetAllPosts(Get.find()), fenix: true);
-
-    // Repository
     Get.lazyPut<PostsRepository>(
         () => PostsRepositoryImpl(
               localDataSource: Get.find(),
@@ -29,8 +21,6 @@ class PostsBinding implements Bindings {
               characterLimit: Get.find(),
             ),
         fenix: true);
-
-    // Data sources
     Get.lazyPut<PostsLocalDataSource>(
         () => PostsLocalDataSourceImpl(hive: Get.find()),
         fenix: true);

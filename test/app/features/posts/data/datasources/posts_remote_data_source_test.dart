@@ -47,7 +47,7 @@ void main() {
       setUpMockClientSuccess200();
       dataSourceImpl.getAllPosts();
       verify(
-        () => mockClient.get('https://api.mocki.io/v1/7f811b6a/posts'),
+        () => mockClient.get('https://api.mocki.io/v1/f932124c/posts'),
       );
     });
 

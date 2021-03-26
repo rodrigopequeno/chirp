@@ -40,7 +40,7 @@ class PostWidget extends StatelessWidget {
                         post.author.authorName,
                         style: Theme.of(context)
                             .textTheme
-                            .bodyText1!
+                            .bodyText2!
                             .copyWith(fontWeight: FontWeight.bold),
                       ),
                       const SpacerH(2),

@@ -84,14 +84,14 @@ void main() {
       });
 
       blocTest<AddPostCubit, AddPostState>(
-        'should emit [AddPostError] when the input content with characters above the limit',
+        'should emit [AddPostLoading, AddPostError] when the input content with characters above the limit',
         build: () {
           when(() => mockCharacterLimit.isWithinTheLimitCreation(any<String>()))
               .thenReturn(false);
           return cubit;
         },
         act: (cubit) => cubit.addPost(tContent),
-        expect: () => [isA<AddPostError>()],
+        expect: () => [AddPostLoading(), isA<AddPostError>()],
       );
     });
   });

@@ -25,6 +25,7 @@ class AddPostCubit extends Cubit<AddPostState> {
       : super(AddPostInitial());
 
   Future<void> addPost(String content) async {
+    emit(AddPostLoading());
     final isWithinTheLimitCreation =
         characterLimit.isWithinTheLimitCreation(content);
     if (!isWithinTheLimitCreation) {
