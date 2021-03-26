@@ -10,7 +10,7 @@ import '../../domain/usecases/create_post.dart';
 
 part 'add_post_state.dart';
 
-const kIsOutOfLimitFailureMessage = "The limit is 280 characters";
+const kIsOutOfLimitFailureMessage = "The limit is $kCharacterLimit characters";
 const kDefaultFailureMessage = "An error occurred, please try again later";
 
 class AddPostCubit extends Cubit<AddPostState> {
