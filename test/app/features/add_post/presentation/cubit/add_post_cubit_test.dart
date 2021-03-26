@@ -1,9 +1,9 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:chirp/app/core/cubit/auth_cubit.dart';
+import 'package:chirp/app/core/entities/author.dart';
+import 'package:chirp/app/core/models/post_model.dart';
 import 'package:chirp/app/core/utils/character_limit.dart';
 import 'package:chirp/app/core/utils/uuid_generator.dart';
-import 'package:chirp/app/features/add_post/data/models/add_post_model.dart';
-import 'package:chirp/app/features/add_post/domain/entities/add_author.dart';
 import 'package:chirp/app/features/add_post/domain/usecases/create_post.dart';
 import 'package:chirp/app/features/add_post/presentation/cubit/add_post_cubit.dart';
 import 'package:chirp/app/features/welcome/domain/entities/logged_user.dart';
@@ -29,12 +29,12 @@ void main() {
   const tUuid = "75418de8-cf36-47c6-8850-3f958fb1b45d";
   const tName = "Rodrigo Pequeno";
   const tLoggedUser = LoggedUser(uid: tUuid, name: tName);
-  const tAuthor = AddAuthor(
+  const tAuthor = Author(
       id: "75418de8-cf36-47c6-8850-3f958fb1b45d",
       authorName: "Rodrigo Pequeno");
   const tContent = "Seja bem vindo";
   final tDateTime = DateTime.now();
-  final tPost = AddPostModel(
+  final tPost = PostModel(
       id: "75418de8-cf36-47c6-8850-3f958fb1b45d",
       author: tAuthor,
       content: tContent,

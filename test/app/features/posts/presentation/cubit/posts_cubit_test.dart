@@ -18,7 +18,8 @@ void main() {
   final tDateTime = DateTime(2021, 03, 23, 09, 24, 01);
   const tAuthor = AuthorModel(
       id: "75418de8-cf36-47c6-8850-3f958fb1b45d",
-      authorName: "Rodrigo Pequeno");
+      authorName: "Rodrigo Pequeno",
+      image: "https://randomuser.me/api/portraits/men/1.jpg");
   final tPosts = [
     PostModel(
       id: '2e9bf094-e494-4e22-ba10-dcf07ebfd18d',

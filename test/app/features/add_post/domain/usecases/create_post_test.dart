@@ -1,5 +1,5 @@
-import 'package:chirp/app/features/add_post/data/models/add_post_model.dart';
-import 'package:chirp/app/features/add_post/domain/entities/add_author.dart';
+import 'package:chirp/app/core/entities/author.dart';
+import 'package:chirp/app/core/models/post_model.dart';
 import 'package:chirp/app/features/add_post/domain/repositories/add_post_repository.dart';
 import 'package:chirp/app/features/add_post/domain/usecases/create_post.dart';
 import 'package:dartz/dartz.dart';
@@ -12,10 +12,10 @@ void main() {
   late CreatePost usecase;
   late MockAddPostRepository mockAddPostRepository;
 
-  const author = AddAuthor(
+  const author = Author(
       id: "75418de8-cf36-47c6-8850-3f958fb1b45d",
       authorName: "Rodrigo Pequeno");
-  final tPost = AddPostModel(
+  final tPost = PostModel(
     id: '0',
     author: author,
     content: "Seja bem vindo",
@@ -23,7 +23,7 @@ void main() {
   );
 
   setUpAll(() {
-    registerFallbackValue<AddPostModel>(tPost);
+    registerFallbackValue<PostModel>(tPost);
   });
 
   setUp(() {

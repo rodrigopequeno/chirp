@@ -1,11 +1,11 @@
 import 'package:bloc/bloc.dart';
+import 'package:chirp/app/core/models/author_model.dart';
+import 'package:chirp/app/core/models/post_model.dart';
 import 'package:equatable/equatable.dart';
 
 import '../../../../core/cubit/auth_cubit.dart';
 import '../../../../core/utils/character_limit.dart';
 import '../../../../core/utils/uuid_generator.dart';
-import '../../data/models/add_author_model.dart';
-import '../../data/models/add_post_model.dart';
 import '../../domain/usecases/create_post.dart';
 
 part 'add_post_state.dart';
@@ -31,11 +31,12 @@ class AddPostCubit extends Cubit<AddPostState> {
       emit(AddPostLoading());
       await Future<void>.delayed(const Duration(seconds: 1));
       final logged = authCubit.state as AuthLogged;
-      final author = AddAuthorModel(
+      final author = AuthorModel(
         id: logged.user.uid,
         authorName: logged.user.name,
+        image: logged.user.image,
       );
-      final post = AddPostModel(
+      final post = PostModel(
           id: uuidGenerator.generated,
           author: author,
           published: DateTime.now(),

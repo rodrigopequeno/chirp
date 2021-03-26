@@ -2,10 +2,9 @@ import 'package:hive/hive.dart';
 
 import '../../../../core/models/post_model.dart';
 import '../../../../core/utils/constants.dart';
-import '../models/add_post_model.dart';
 
 abstract class AddPostDataSource {
-  Future<void> createPost(AddPostModel addPostModel);
+  Future<void> createPost(PostModel addPostModel);
 }
 
 class AddPostDataSourceImpl implements AddPostDataSource {
@@ -19,7 +18,7 @@ class AddPostDataSourceImpl implements AddPostDataSource {
   }
 
   @override
-  Future<void> createPost(AddPostModel addPostModel) async {
+  Future<void> createPost(PostModel addPostModel) async {
     final box = await _openBox(kPosts);
     final posts = box.get(kPosts, defaultValue: []);
     final newPosts = List<PostModel>.from(posts as List)..add(addPostModel);

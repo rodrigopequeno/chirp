@@ -5,13 +5,15 @@ import 'package:hive/hive.dart';
 import '../entities/author.dart';
 
 class AuthorModel extends Author {
-  const AuthorModel({required String id, required String authorName})
-      : super(id: id, authorName: authorName);
+  const AuthorModel(
+      {required String id, required String authorName, String? image})
+      : super(id: id, authorName: authorName, image: image);
 
   Map<String, dynamic> toMap() {
     return {
       'AutorID': id,
       'AutorNome': authorName,
+      'AutorImageUrl': image,
     };
   }
 
@@ -19,6 +21,7 @@ class AuthorModel extends Author {
     return AuthorModel(
       id: map['AutorID'] as String,
       authorName: map['AutorNome'] as String,
+      image: map['AutorImageUrl'] as String,
     );
   }
 
@@ -41,17 +44,20 @@ class AuthorModelAdapter extends TypeAdapter<AuthorModel> {
     return AuthorModel(
       id: fields[0] as String,
       authorName: fields[1] as String,
+      image: fields[2] as String,
     );
   }
 
   @override
   void write(BinaryWriter writer, AuthorModel obj) {
     writer
-      ..writeByte(2)
+      ..writeByte(3)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
-      ..write(obj.authorName);
+      ..write(obj.authorName)
+      ..writeByte(2)
+      ..write(obj.image);
   }
 
   @override
