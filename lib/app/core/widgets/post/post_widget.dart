@@ -1,6 +1,5 @@
 import 'package:chirp/app/core/utils/humanize_duration.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../entities/post.dart';
@@ -9,14 +8,14 @@ import '../spacers/spacers.dart';
 
 class PostWidget extends StatelessWidget {
   final Post post;
-  const PostWidget({Key? key, required this.post}) : super(key: key);
+  final void Function()? onPressed;
+  const PostWidget({Key? key, required this.post, this.onPressed})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {
-        Get.toNamed("/details", arguments: post);
-      },
+      onTap: onPressed,
       child: Card(
         margin: const EdgeInsets.all(15),
         elevation: 5,

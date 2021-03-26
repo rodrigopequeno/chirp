@@ -1,5 +1,6 @@
 import 'package:asuka/asuka.dart' as asuka;
 import 'package:chirp/app/core/widgets/post/post_widget.dart';
+import 'package:chirp/app/core/widgets/scaffold/scaffold_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
@@ -39,77 +40,89 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<PostDetailsCubit>(
-      create: (context) => cubit,
-      child: Scaffold(
-        appBar: AppBar(
-          title: const Text('Post Details'),
-          centerTitle: true,
-          actions: [
-            Visibility(
-              visible: widget.isAuthor,
-              child: IconButton(
-                  icon: const Icon(Icons.edit),
-                  onPressed: () {
-                    asuka.showDialog(
-                      builder: (context) => EditDialogWidget(
-                        content: post.content,
-                        edit: (newContent) async {
-                          Navigator.pop(context);
-                          await cubit.edit(post.id, newContent);
-                        },
-                      ),
-                    );
-                  }),
-            ),
-            Visibility(
-              visible: widget.isAuthor,
-              child: IconButton(
-                  icon: const Icon(Icons.delete),
-                  onPressed: () async {
-                    asuka.showDialog(
-                      builder: (context) => DeleteDialogWidget(
-                        delete: () async {
-                          Navigator.pop(context);
-                          await cubit.delete(post.id);
-                          Get.offAllNamed('/posts');
-                        },
-                      ),
-                    );
-                  }),
-            ),
-          ],
+    return ScaffoldWidget(
+      loggedUser: (Get.find<AuthCubit>().state as AuthLogged).user,
+      actions: [
+        Visibility(
+          visible: widget.isAuthor,
+          child: IconButton(
+              icon: const Icon(Icons.edit),
+              onPressed: () {
+                asuka.showDialog(
+                  builder: (context) => EditDialogWidget(
+                    content: post.content,
+                    edit: (newContent) async {
+                      Navigator.pop(context);
+                      await cubit.edit(post.id, newContent);
+                    },
+                  ),
+                );
+              }),
         ),
-        body: _buildBody(),
+        Visibility(
+          visible: widget.isAuthor,
+          child: IconButton(
+              icon: const Icon(Icons.delete),
+              onPressed: () async {
+                asuka.showDialog(
+                  builder: (context) => DeleteDialogWidget(
+                    delete: () async {
+                      Navigator.pop(context);
+                      await cubit.delete(post.id);
+                      Get.offAllNamed('/posts');
+                    },
+                  ),
+                );
+              }),
+        ),
+      ],
+      content: Expanded(
+        child: Text(
+          "Post",
+          maxLines: 2,
+          style: Theme.of(context).textTheme.bodyText2!.copyWith(
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+                fontSize: 16,
+              ),
+        ),
       ),
+      body: _buildBody(),
     );
   }
 
   Widget _buildBody() {
-    return Padding(
-      padding: const EdgeInsets.all(10),
+    return BlocProvider<PostDetailsCubit>(
+      create: (context) => cubit,
       child: BlocConsumer<PostDetailsCubit, PostDetailsState>(
-        listener: (context, state) {
-          if (state is PostDetailsLoading) {
-            loading.show();
-          } else if (loading.isShow) {
-            loading.hide();
-          }
-          if (state is PostDetailsError) {
-            asuka.showSnackBar(SnackBar(content: Text(state.message)));
-          }
-          if (state is PostDetailsDeleteSuccess) {
-            asuka.showSnackBar(SnackBar(content: Text(state.message)));
-          }
-          if (state is PostDetailsEditSuccess) {
-            post = state.editedPost;
-            asuka.showSnackBar(SnackBar(content: Text(state.message)));
-          }
-        },
+        listener: _listener,
         builder: (context, state) {
-          return PostWidget(post: post);
+          return Padding(
+            padding: const EdgeInsets.all(10),
+            child: PostWidget(
+              post: post,
+            ),
+          );
         },
       ),
     );
+  }
+
+  void _listener(context, state) {
+    if (state is PostDetailsLoading) {
+      loading.show();
+    } else if (loading.isShow) {
+      loading.hide();
+    }
+    if (state is PostDetailsError) {
+      asuka.showSnackBar(SnackBar(content: Text(state.message)));
+    }
+    if (state is PostDetailsDeleteSuccess) {
+      asuka.showSnackBar(SnackBar(content: Text(state.message)));
+    }
+    if (state is PostDetailsEditSuccess) {
+      post = state.editedPost;
+      asuka.showSnackBar(SnackBar(content: Text(state.message)));
+    }
   }
 }

@@ -3,7 +3,6 @@ import 'package:equatable/equatable.dart';
 
 import '../../../../core/entities/post.dart';
 import '../../../../core/error/failure.dart';
-import '../../../posts/presentation/cubit/posts_cubit.dart';
 import '../../domain/usecases/delete_post.dart';
 import '../../domain/usecases/edit_post.dart';
 
@@ -20,12 +19,10 @@ const kEditPostFailureMessage =
 class PostDetailsCubit extends Cubit<PostDetailsState> {
   final DeletePost deletePost;
   final EditPost editPost;
-  final PostsCubit postsCubit;
 
   PostDetailsCubit(
     this.deletePost,
     this.editPost,
-    this.postsCubit,
   ) : super(PostDetailsInitial());
 
   Future<void> delete(String uid) async {
@@ -40,7 +37,6 @@ class PostDetailsCubit extends Cubit<PostDetailsState> {
       }
     }, (r) async {
       emit(PostDetailsDeleteSuccess(kDeleteSuccessMessage));
-      await postsCubit.getPosts();
     });
   }
 
@@ -56,7 +52,6 @@ class PostDetailsCubit extends Cubit<PostDetailsState> {
       }
     }, (editedPost) async {
       emit(PostDetailsEditSuccess(kEditSuccessMessage, editedPost));
-      await postsCubit.getPosts();
     });
   }
 }

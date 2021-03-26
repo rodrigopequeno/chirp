@@ -11,7 +11,7 @@ import 'presentation/cubit/post_details_cubit.dart';
 class PostDetailsBinding implements Bindings {
   @override
   void dependencies() {
-    Get.create(() => PostDetailsCubit(Get.find(), Get.find(), Get.find()));
+    Get.create(() => PostDetailsCubit(Get.find(), Get.find()));
     // Use cases
     Get.lazyPut(() => EditPost(Get.find()), fenix: true);
     Get.lazyPut(() => DeletePost(Get.find()), fenix: true);

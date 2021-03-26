@@ -102,7 +102,13 @@ class PostsPage extends StatelessWidget {
         itemCount: state.posts.length,
         itemBuilder: (context, index) {
           final post = state.posts[index];
-          return PostWidget(post: post);
+          return PostWidget(
+            post: post,
+            onPressed: () async {
+              await Get.toNamed("/details", arguments: post);
+              context.read<PostsCubit>().getPosts();
+            },
+          );
         },
       ),
     );

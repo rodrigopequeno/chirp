@@ -5,7 +5,6 @@ import 'package:chirp/app/core/models/post_model.dart';
 import 'package:chirp/app/features/post_details/domain/usecases/delete_post.dart';
 import 'package:chirp/app/features/post_details/domain/usecases/edit_post.dart';
 import 'package:chirp/app/features/post_details/presentation/cubit/post_details_cubit.dart';
-import 'package:chirp/app/features/posts/presentation/cubit/posts_cubit.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
@@ -13,8 +12,6 @@ import 'package:mocktail/mocktail.dart';
 class MockDeletePost extends Mock implements DeletePost {}
 
 class MockEditPost extends Mock implements EditPost {}
-
-class MockPostsCubit extends Mock implements PostsCubit {}
 
 // ignore: avoid_implementing_value_types
 class ParamsDeleteFake extends Fake implements ParamsDelete {}
@@ -26,7 +23,6 @@ void main() {
   late PostDetailsCubit cubit;
   late MockDeletePost mockDeletePost;
   late MockEditPost mockEditPost;
-  late MockPostsCubit mockPostsCubit;
 
   setUpAll(() {
     registerFallbackValue<ParamsDelete>(ParamsDeleteFake());
@@ -49,10 +45,8 @@ void main() {
   setUp(() {
     mockDeletePost = MockDeletePost();
     mockEditPost = MockEditPost();
-    mockPostsCubit = MockPostsCubit();
 
-    cubit = PostDetailsCubit(mockDeletePost, mockEditPost, mockPostsCubit);
-    when(() => mockPostsCubit.getPosts()).thenAnswer((_) async => {});
+    cubit = PostDetailsCubit(mockDeletePost, mockEditPost);
   });
 
   tearDown(() {
