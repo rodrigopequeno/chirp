@@ -44,7 +44,7 @@ class AuthorModelAdapter extends TypeAdapter<AuthorModel> {
     return AuthorModel(
       id: fields[0] as String,
       authorName: fields[1] as String,
-      image: fields[2] as String,
+      image: fields[2] == null ? null : fields[2] as String,
     );
   }
 
