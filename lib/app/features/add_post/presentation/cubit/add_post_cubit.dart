@@ -10,7 +10,8 @@ import '../../domain/usecases/create_post.dart';
 
 part 'add_post_state.dart';
 
-const kIsOutOfLimitFailureMessage = "The limit is $kCharacterLimit characters";
+const kIsOutOfLimitFailureMessage =
+    "The limit is $kCharacterLimitCreation characters";
 const kDefaultFailureMessage = "An error occurred, please try again later";
 
 class AddPostCubit extends Cubit<AddPostState> {
@@ -24,8 +25,9 @@ class AddPostCubit extends Cubit<AddPostState> {
       : super(AddPostInitial());
 
   Future<void> addPost(String content) async {
-    final isWithinTheLimit = characterLimit.isWithinTheLimit(content);
-    if (!isWithinTheLimit) {
+    final isWithinTheLimitCreation =
+        characterLimit.isWithinTheLimitCreation(content);
+    if (!isWithinTheLimitCreation) {
       emit(AddPostError(kIsOutOfLimitFailureMessage));
     } else {
       emit(AddPostLoading());

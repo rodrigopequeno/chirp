@@ -24,7 +24,7 @@ class EditDialogWidget extends StatelessWidget {
           children: [
             TextFormField(
               controller: contentController,
-              maxLength: kCharacterLimit,
+              maxLength: kCharacterLimitCreation,
               keyboardType: TextInputType.multiline,
               maxLines: null,
               decoration: const InputDecoration(

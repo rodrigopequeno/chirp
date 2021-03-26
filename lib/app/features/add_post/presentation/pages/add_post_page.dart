@@ -52,7 +52,7 @@ class AddPostPage extends StatelessWidget {
           children: <Widget>[
             TextFormField(
               controller: contentController,
-              maxLength: kCharacterLimit,
+              maxLength: kCharacterLimitCreation,
               keyboardType: TextInputType.multiline,
               maxLines: null,
               decoration: const InputDecoration(

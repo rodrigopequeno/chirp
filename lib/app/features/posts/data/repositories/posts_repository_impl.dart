@@ -28,8 +28,8 @@ class PostsRepositoryImpl extends PostsRepository {
       try {
         final remotePosts = await remoteDataSource.getAllPosts();
         final postsFilteredByCharacterLimit = remotePosts
-            .where(
-                (element) => characterLimit.isWithinTheLimit(element.content))
+            .where((element) =>
+                characterLimit.isWithinTheLimitPreview(element.content))
             .toList();
         localDataSource.cachePosts(postsFilteredByCharacterLimit);
         final localPostsSave = await localDataSource.getPosts();

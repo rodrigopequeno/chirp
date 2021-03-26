@@ -86,7 +86,8 @@ void main() {
           .thenAnswer((_) async => tPosts);
       when(() => mockLocalDataSource.getPosts()).thenAnswer((_) async => []);
       when(() => mockNetworkInfo.isConnected).thenAnswer((_) async => true);
-      when(() => mockCharacterLimit.isWithinTheLimit(any())).thenReturn(true);
+      when(() => mockCharacterLimit.isWithinTheLimitPreview(any()))
+          .thenReturn(true);
       repositoryImpl.getAllPosts();
       verify(() => mockNetworkInfo.isConnected);
     });
@@ -98,7 +99,8 @@ void main() {
         when(() => mockRemoteDataSource.getAllPosts())
             .thenAnswer((_) async => tPosts);
         when(() => mockLocalDataSource.getPosts()).thenAnswer((_) async => []);
-        when(() => mockCharacterLimit.isWithinTheLimit(any())).thenReturn(true);
+        when(() => mockCharacterLimit.isWithinTheLimitPreview(any()))
+            .thenReturn(true);
         final result = await repositoryImpl.getAllPosts();
         verify(() => mockRemoteDataSource.getAllPosts());
         expect(result, isA<Right<dynamic, List<PostModel>>>());
@@ -110,7 +112,8 @@ should cache the data locally when the call to remote data source is successful'
         when(() => mockRemoteDataSource.getAllPosts())
             .thenAnswer((_) async => tPosts);
         when(() => mockLocalDataSource.getPosts()).thenAnswer((_) async => []);
-        when(() => mockCharacterLimit.isWithinTheLimit(any())).thenReturn(true);
+        when(() => mockCharacterLimit.isWithinTheLimitPreview(any()))
+            .thenReturn(true);
         await repositoryImpl.getAllPosts();
         verify(() => mockRemoteDataSource.getAllPosts());
         verify(() => mockLocalDataSource.cachePosts(tPosts));

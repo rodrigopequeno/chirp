@@ -66,7 +66,7 @@ void main() {
   });
 
   void setUpMockCharacterLimitSuccess() {
-    when(() => mockCharacterLimit.isWithinTheLimit(any<String>()))
+    when(() => mockCharacterLimit.isWithinTheLimitCreation(any<String>()))
         .thenReturn(true);
   }
 
@@ -78,14 +78,15 @@ void main() {
         when(() => mockCreatePost(any()))
             .thenAnswer((_) async => const Right(unit));
         cubit.addPost(tContent);
-        await untilCalled(() => mockCharacterLimit.isWithinTheLimit(tContent));
-        verify(() => mockCharacterLimit.isWithinTheLimit(tContent));
+        await untilCalled(
+            () => mockCharacterLimit.isWithinTheLimitCreation(tContent));
+        verify(() => mockCharacterLimit.isWithinTheLimitCreation(tContent));
       });
 
       blocTest<AddPostCubit, AddPostState>(
         'should emit [AddPostError] when the input content with characters above the limit',
         build: () {
-          when(() => mockCharacterLimit.isWithinTheLimit(any<String>()))
+          when(() => mockCharacterLimit.isWithinTheLimitCreation(any<String>()))
               .thenReturn(false);
           return cubit;
         },
