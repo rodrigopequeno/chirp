@@ -1,0 +1,76 @@
+{
+  "Result": [
+    {
+      "ID": "4590d445-77a7-43a5-8279-785b494d7577",
+      "Codigo": "PS006",
+      "Respostas": 1,
+      "DataHora": "1616502241000",
+      "EstaLido": false,
+      "AutorID": "465bc8d5-ca8e-4c00-a6e6-de48d6479571",
+      "AutorNome": "Beatriz Barbosa",
+      "AutorImageUrl": "https://randomuser.me/api/portraits/women/1.jpg",
+      "Texto": "It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+      "Versao": 3
+    },
+    {
+      "ID": "2df65442-2650-4fae-b7c9-8dce6c18cbb0",
+      "Codigo": "PS005",
+      "Respostas": 0,
+      "DataHora": "1616451300000",
+      "EstaLido": false,
+      "AutorID": "8b9f6b85-d73f-426b-8406-4e612d1293cf",
+      "AutorNome": "Rodrigo Azevedo",
+      "AutorImageUrl": "https://randomuser.me/api/portraits/men/73.jpg",
+      "Texto": "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.",
+      "Versao": 1
+    },
+    {
+      "ID": "df34adc1-a3b5-45d7-b552-4e399fc6b1c4",
+      "Codigo": "PS004",
+      "Respostas": 2,
+      "DataHora": "1615973400000",
+      "EstaLido": true,
+      "AutorID": "817ddb6b-c385-42e8-9d49-50132e7a2bf3",
+      "AutorNome": "Bianca Costa",
+      "AutorImageUrl": "https://randomuser.me/api/portraits/women/3.jpg",
+      "Texto": "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.",
+      "Versao": 2
+    },
+    {
+      "ID": "90457759-74bd-4576-9b62-525d343dcb14",
+      "Codigo": "PS003",
+      "Respostas": 0,
+      "DataHora": "1615809000000",
+      "EstaLido": false,
+      "AutorID": "f059e5e2-dbb7-4d6a-bd5e-bd5bd94dda41",
+      "AutorNome": "Júlio Pereira",
+      "AutorImageUrl": "https://randomuser.me/api/portraits/men/73.jpg",
+      "Texto": "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable.",
+      "Versao": 1
+    },
+    {
+      "ID": "aa5bce1d-ec93-492b-89ca-7f4f9bd400f8",
+      "Codigo": "PS002",
+      "Respostas": 1,
+      "DataHora": "1611567355000",
+      "EstaLido": true,
+      "AutorID": "a3d23a89-7d4b-4966-b830-99448a181613",
+      "AutorNome": "Victor Cunha",
+      "AutorImageUrl": "https://randomuser.me/api/portraits/men/73.jpg",
+      "Texto": "All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet.",
+      "Versao": 1
+    },
+    {
+      "ID": "e9e5c7fb-d55e-4466-98a9-29168602b5e1",
+      "Codigo": "PS001",
+      "Respostas": 3,
+      "DataHora": "1608647195000",
+      "EstaLido": true,
+      "AutorID": "c747ddd9-8053-4cd5-b01a-7365b90471b4",
+      "AutorNome": "Pedro Cardoso",
+      "AutorImageUrl": "https://randomuser.me/api/portraits/men/73.jpg",
+      "Texto": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.",
+      "Versao": 1
+    }
+  ]
+}
