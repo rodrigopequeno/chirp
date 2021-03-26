@@ -5,6 +5,12 @@ mixin ThemeApp {
   static ThemeData get light => ThemeData.light().copyWith(
         primaryColor: const Color.fromRGBO(53, 97, 120, 1),
         accentColor: const Color.fromRGBO(231, 130, 68, 1),
+        floatingActionButtonTheme: const FloatingActionButtonThemeData(
+          backgroundColor: Color.fromRGBO(45, 82, 102, 1),
+        ),
+        iconTheme: const IconThemeData(
+          color: Colors.white,
+        ),
         textTheme: GoogleFonts.ralewayTextTheme(
           const TextTheme(
             headline1: TextStyle(

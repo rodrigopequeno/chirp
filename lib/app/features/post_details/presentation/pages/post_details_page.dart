@@ -1,4 +1,5 @@
 import 'package:asuka/asuka.dart' as asuka;
+import 'package:chirp/app/core/widgets/post/post_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
@@ -6,7 +7,6 @@ import 'package:get/get.dart';
 import '../../../../core/cubit/auth_cubit.dart';
 import '../../../../core/entities/post.dart';
 import '../../../../core/widgets/loading_indicator/loading_indicator_widget.dart';
-import '../../../posts/presentation/widgets/post_widget.dart';
 import '../cubit/post_details_cubit.dart';
 import '../widgets/delete_dialog_widget.dart';
 import '../widgets/edit_dialog_widget.dart';
