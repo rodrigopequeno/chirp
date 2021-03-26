@@ -12,7 +12,7 @@ class AvatarWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Visibility(
-      visible: image != null,
+      visible: image != null && image!.isNotEmpty,
       replacement: Center(
         child: Icon(
           Icons.account_circle,
