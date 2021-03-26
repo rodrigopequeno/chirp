@@ -79,11 +79,9 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
       content: Expanded(
         child: Text(
           "Post",
-          maxLines: 2,
-          style: Theme.of(context).textTheme.bodyText2!.copyWith(
+          style: Theme.of(context).textTheme.headline6!.copyWith(
                 fontWeight: FontWeight.bold,
                 color: Colors.white,
-                fontSize: 16,
               ),
         ),
       ),

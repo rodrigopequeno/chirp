@@ -32,7 +32,7 @@ class ScaffoldWidget extends StatelessWidget {
           children: [
             _appBarInfo(context),
             Container(
-              margin: const EdgeInsets.only(top: 110),
+              margin: const EdgeInsets.only(top: 100),
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius:
@@ -94,10 +94,9 @@ class ScaffoldWidget extends StatelessWidget {
         child: Text(
           loggedUser.name,
           maxLines: 2,
-          style: Theme.of(context).textTheme.bodyText2!.copyWith(
+          style: Theme.of(context).textTheme.subtitle1!.copyWith(
                 fontWeight: FontWeight.bold,
                 color: Colors.white,
-                fontSize: 14,
               ),
         ),
       )
