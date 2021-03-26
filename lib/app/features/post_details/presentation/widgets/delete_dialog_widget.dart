@@ -1,3 +1,4 @@
+import 'package:chirp/app/core/widgets/button/button_widget.dart';
 import 'package:flutter/material.dart';
 
 class DeleteDialogWidget extends StatelessWidget {
@@ -7,14 +8,21 @@ class DeleteDialogWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: const Text("Do you really want to delete?"),
+      title: const Text(
+        "Do you really want to delete?",
+        textAlign: TextAlign.center,
+      ),
       actions: [
-        ElevatedButton(
+        ButtonWidget(
             onPressed: () {
               Navigator.pop(context);
             },
-            child: const Text("CANCEL")),
-        ElevatedButton(onPressed: delete, child: const Text("OK")),
+            text: "CANCEL"),
+        ButtonWidget(
+          onPressed: delete,
+          text: "OK",
+          colorButton: Theme.of(context).accentColor,
+        ),
       ],
     );
   }

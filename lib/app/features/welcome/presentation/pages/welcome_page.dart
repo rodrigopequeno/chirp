@@ -19,6 +19,7 @@ class WelcomePage extends StatefulWidget {
 
 class _WelcomePageState extends State<WelcomePage> {
   final TextEditingController nameController = TextEditingController();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final controller = Get.find<WelcomeCubit>()..init();
   final loading = LoadingIndicatorImpl();
 
@@ -112,34 +113,49 @@ class _WelcomePageState extends State<WelcomePage> {
   }
 
   Widget _buildForm() {
-    return Column(
-      children: <Widget>[
-        SizedBox(
-          width: MediaQuery.of(context).size.width * 0.8,
-          child: TextFieldWidget(
-            controller: nameController,
-            textInputAction: TextInputAction.done,
-            prefixIcon: const Icon(Icons.account_circle_outlined),
-            colorBorder: Theme.of(context).primaryColor,
-            onFieldSubmitted: (_) async => await _submitted(),
-            label: 'Name',
+    return Form(
+      key: _formKey,
+      child: Column(
+        children: <Widget>[
+          SizedBox(
+            width: MediaQuery.of(context).size.width * 0.8,
+            child: TextFieldWidget(
+              controller: nameController,
+              textInputAction: TextInputAction.done,
+              prefixIcon: const Icon(Icons.account_circle_outlined),
+              colorBorder: Theme.of(context).primaryColor,
+              onFieldSubmitted: (_) async => await _submitted(),
+              label: 'Name',
+              validator: (value) {
+                const kRequired = "Required field";
+                if (value == null) {
+                  return kRequired;
+                } else if (value.isEmpty) {
+                  return kRequired;
+                }
+                return null;
+              },
+            ),
           ),
-        ),
-        const SpacerH(15),
-        ButtonWidget(
-          onPressed: () async {
-            await _submitted();
-          },
-          text: "ENTER",
-          colorButton: Theme.of(context).primaryColor,
-          radius: 20,
-          width: 100,
-        ),
-      ],
+          const SpacerH(15),
+          ButtonWidget(
+            onPressed: () async {
+              await _submitted();
+            },
+            text: "ENTER",
+            colorButton: Theme.of(context).primaryColor,
+            radius: 20,
+            width: 100,
+          ),
+        ],
+      ),
     );
   }
 
   Future<void> _submitted() async {
-    await controller.signIn(nameController.text);
+    FocusScope.of(context).requestFocus(FocusNode());
+    if (_formKey.currentState!.validate()) {
+      await controller.signIn(nameController.text);
+    }
   }
 }

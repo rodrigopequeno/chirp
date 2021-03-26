@@ -11,6 +11,7 @@ class ScaffoldWidget extends StatelessWidget {
   final LoggedUser loggedUser;
   final Future<bool> Function()? onWillPop;
   final Widget? floatingActionButton;
+  final Widget? content;
   const ScaffoldWidget({
     Key? key,
     required this.body,
@@ -18,6 +19,7 @@ class ScaffoldWidget extends StatelessWidget {
     this.actions = const <Widget>[],
     this.floatingActionButton,
     this.onWillPop,
+    this.content,
   }) : super(key: key);
 
   @override
@@ -71,27 +73,34 @@ class ScaffoldWidget extends StatelessWidget {
               }
             }),
           ),
-          AvatarWidget(
-            image: loggedUser.image,
-            cor: Colors.white,
-            width: 50,
-          ),
-          const SpacerW(10),
-          Expanded(
-            child: Text(
-              loggedUser.name,
-              maxLines: 2,
-              style: Theme.of(context).textTheme.bodyText2!.copyWith(
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                    fontSize: 13,
-                  ),
-            ),
-          ),
+          ..._contentAppBar(context),
           const SpacerW(10),
           ...actions,
         ],
       ),
     );
+  }
+
+  List<Widget> _contentAppBar(BuildContext context) {
+    if (content != null) return [content!];
+    return [
+      AvatarWidget(
+        image: loggedUser.image,
+        cor: Colors.white,
+        width: 50,
+      ),
+      const SpacerW(10),
+      Expanded(
+        child: Text(
+          loggedUser.name,
+          maxLines: 2,
+          style: Theme.of(context).textTheme.bodyText2!.copyWith(
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+                fontSize: 14,
+              ),
+        ),
+      )
+    ];
   }
 }
