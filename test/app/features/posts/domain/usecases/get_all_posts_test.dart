@@ -1,6 +1,6 @@
+import 'package:chirp/app/core/entities/author.dart';
+import 'package:chirp/app/core/entities/post.dart';
 import 'package:chirp/app/core/usecases/usecase.dart';
-import 'package:chirp/app/features/posts/domain/entities/author.dart';
-import 'package:chirp/app/features/posts/domain/entities/posts.dart';
 import 'package:chirp/app/features/posts/domain/repositories/posts_repository.dart';
 import 'package:chirp/app/features/posts/domain/usecases/get_all_posts.dart';
 import 'package:dartz/dartz.dart';

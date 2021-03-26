@@ -1,10 +1,10 @@
 import 'dart:convert';
 
-import 'package:chirp/app/features/posts/data/models/author_model.dart';
-import 'package:chirp/app/features/posts/domain/entities/author.dart';
 import 'package:hive/hive.dart';
 
-import '../../domain/entities/posts.dart';
+import '../entities/author.dart';
+import '../entities/post.dart';
+import 'author_model.dart';
 
 class PostModel extends Post {
   const PostModel(
@@ -18,6 +18,17 @@ class PostModel extends Post {
           published: published,
           id: id,
         );
+
+  PostModel copyWith({
+    String? content,
+  }) {
+    return PostModel(
+      id: id,
+      author: author,
+      published: published,
+      content: content ?? this.content,
+    );
+  }
 
   Map<String, dynamic> toMap() {
     final Map<String, dynamic> postMap = {

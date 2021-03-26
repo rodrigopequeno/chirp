@@ -1,27 +1,30 @@
 import 'dart:async';
 
-import 'package:chirp/app/features/posts/data/models/author_model.dart';
-import 'package:chirp/app/features/posts/data/models/post_model.dart';
 import 'package:hive/hive.dart';
 
 import '../../../../core/error/exceptions.dart';
+import '../../../../core/models/author_model.dart';
+import '../../../../core/models/post_model.dart';
+import '../../../../core/utils/constants.dart';
 
 abstract class PostsLocalDataSource {
   Future<List<PostModel>> getPosts();
-  Future<void> putPosts(List<PostModel> postsToCache);
   Future<List<PostModel>> getCachePosts();
   Future<void> cachePosts(List<PostModel> postsToCache);
 }
 
 const kCachedPosts = "CACHED_POSTS";
-const kPosts = "POSTS";
 
 class PostsLocalDataSourceImpl implements PostsLocalDataSource {
   final HiveInterface hive;
 
   PostsLocalDataSourceImpl({required this.hive}) {
-    hive.registerAdapter<PostModel>(PostModelAdapter());
-    hive.registerAdapter<AuthorModel>(AuthorModelAdapter());
+    if (!hive.isAdapterRegistered(PostModelAdapter().typeId)) {
+      hive.registerAdapter<PostModel>(PostModelAdapter());
+    }
+    if (!hive.isAdapterRegistered(AuthorModelAdapter().typeId)) {
+      hive.registerAdapter<AuthorModel>(AuthorModelAdapter());
+    }
   }
 
   @override
@@ -45,12 +48,6 @@ class PostsLocalDataSourceImpl implements PostsLocalDataSource {
     final box = await _openBox(kPosts);
     final posts = box.get(kPosts, defaultValue: []);
     return Future.value(List<PostModel>.from(posts as List));
-  }
-
-  @override
-  Future<void> putPosts(List<PostModel> postsToSave) async {
-    final box = await _openBox(kPosts);
-    box.put(kPosts, postsToSave);
   }
 
   Future<Box> _openBox(String type) async {

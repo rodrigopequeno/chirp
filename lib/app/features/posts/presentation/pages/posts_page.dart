@@ -1,10 +1,11 @@
-import 'package:chirp/app/features/posts/presentation/cubit/posts_cubit.dart';
-import 'package:chirp/app/features/posts/presentation/widgets/post_widget.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:asuka/asuka.dart' as asuka;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:asuka/asuka.dart' as asuka;
-import 'package:get/instance_manager.dart';
+import 'package:get/get.dart';
+
+import '../../../../core/cubit/auth_cubit.dart';
+import '../cubit/posts_cubit.dart';
+import '../widgets/post_widget.dart';
 
 class PostsPage extends StatelessWidget {
   const PostsPage({Key? key}) : super(key: key);
@@ -18,7 +19,11 @@ class PostsPage extends StatelessWidget {
         actions: [
           IconButton(
             icon: const Icon(Icons.logout),
-            onPressed: () {},
+            tooltip: "Logout",
+            onPressed: () async {
+              await Get.find<AuthCubit>().logout();
+              Get.offAllNamed('/');
+            },
           ),
         ],
       ),
@@ -46,7 +51,7 @@ class PostsPage extends StatelessWidget {
         } else if (state is PostsError) {
           return _buildError(context, state);
         } else if (state is PostsSuccess) {
-          return _buildPosts(state);
+          return _buildPosts(context, state);
         }
         return Container();
       },
@@ -77,22 +82,26 @@ class PostsPage extends StatelessWidget {
     );
   }
 
-  ListView _buildPosts(PostsSuccess state) {
-    return ListView.builder(
-      itemCount: state.posts.length,
-      itemBuilder: (context, index) {
-        final post = state.posts[index];
-        return PostWidget(post: post);
-      },
+  Widget _buildPosts(BuildContext context, PostsSuccess state) {
+    return RefreshIndicator(
+      onRefresh: context.read<PostsCubit>().getPosts,
+      child: ListView.builder(
+        itemCount: state.posts.length,
+        itemBuilder: (context, index) {
+          final post = state.posts[index];
+          return PostWidget(post: post);
+        },
+      ),
     );
   }
 
   Widget _floatingActionButton() {
     return FloatingActionButton(
       onPressed: () {
-        debugPrint("add");
+        Get.toNamed("/add-post");
       },
-      child: const Icon(Icons.add),
+      tooltip: "Create post",
+      child: const Icon(Icons.add_comment_rounded),
     );
   }
 }

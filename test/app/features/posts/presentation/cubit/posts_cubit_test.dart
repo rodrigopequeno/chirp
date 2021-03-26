@@ -1,8 +1,8 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:chirp/app/core/error/failure.dart';
+import 'package:chirp/app/core/models/author_model.dart';
+import 'package:chirp/app/core/models/post_model.dart';
 import 'package:chirp/app/core/usecases/usecase.dart';
-import 'package:chirp/app/features/posts/data/models/author_model.dart';
-import 'package:chirp/app/features/posts/data/models/post_model.dart';
 import 'package:chirp/app/features/posts/domain/usecases/get_all_posts.dart';
 import 'package:chirp/app/features/posts/presentation/cubit/posts_cubit.dart';
 import 'package:dartz/dartz.dart';
@@ -15,16 +15,17 @@ void main() {
   late PostsCubit cubit;
   late MockGetAllPosts mockGetAllPosts;
 
-  final dateTime = DateTime(2021, 03, 23, 09, 24, 01);
-  const author = AuthorModel(
+  final tDateTime = DateTime(2021, 03, 23, 09, 24, 01);
+  const tAuthor = AuthorModel(
       id: "75418de8-cf36-47c6-8850-3f958fb1b45d",
-      authorName: "Rodrigo Pequeno");
+      authorName: "Rodrigo Pequeno",
+      image: "https://randomuser.me/api/portraits/men/1.jpg");
   final tPosts = [
     PostModel(
-      id: '0',
-      author: author,
-      published: dateTime,
-      content: 'Olá',
+      id: '2e9bf094-e494-4e22-ba10-dcf07ebfd18d',
+      author: tAuthor,
+      published: tDateTime,
+      content: 'Hello',
     )
   ];
 

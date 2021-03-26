@@ -1,8 +1,9 @@
-import 'package:chirp/app/core/error/exceptions.dart';
-import 'package:chirp/app/core/utils/uuid_generator.dart';
-import 'package:chirp/app/features/welcome/data/models/user_model.dart';
-import 'package:chirp/app/features/welcome/domain/entities/logged_user.dart';
 import 'package:hive/hive.dart';
+
+import '../../../../core/error/exceptions.dart';
+import '../../../../core/utils/uuid_generator.dart';
+import '../../domain/entities/logged_user.dart';
+import '../models/user_model.dart';
 
 abstract class WelcomeDataSource {
   Future<UserModel> signInWithName({required String name});
@@ -17,7 +18,9 @@ class WelcomeDataSourceImpl implements WelcomeDataSource {
   final UuidGenerator uuid;
 
   WelcomeDataSourceImpl(this.hive, this.uuid) {
-    hive.registerAdapter<UserModel>(UserModelAdapter());
+    if (!hive.isAdapterRegistered(UserModelAdapter().typeId)) {
+      hive.registerAdapter<UserModel>(UserModelAdapter());
+    }
   }
 
   @override
@@ -45,7 +48,7 @@ class WelcomeDataSourceImpl implements WelcomeDataSource {
   @override
   Future<void> signOut() async {
     final box = await _openBox(kBoxUserInfo);
-    box.clear();
+    await box.clear();
   }
 
   Future<Box> _openBox(String type) async {

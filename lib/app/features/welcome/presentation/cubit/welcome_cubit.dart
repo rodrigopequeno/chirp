@@ -1,13 +1,13 @@
 import 'package:bloc/bloc.dart';
-import 'package:chirp/app/core/cubit/auth_cubit.dart';
-import 'package:chirp/app/core/error/failure.dart';
-import 'package:chirp/app/features/welcome/domain/usecases/sign_in_with_name.dart';
 import 'package:equatable/equatable.dart';
+
+import '../../../../core/cubit/auth_cubit.dart';
+import '../../../../core/error/failure.dart';
+import '../../domain/usecases/sign_in_with_name.dart';
 
 part 'welcome_state.dart';
 
-const kSignInFailureMessage =
-    'Ocorreu um erro ao tentar entrar, tente novamente mais tarde';
+const kSignInFailureMessage = 'An error occurred, please try again later';
 
 class WelcomeCubit extends Cubit<WelcomeState> {
   final SignInWithName signInWithName;
@@ -17,7 +17,7 @@ class WelcomeCubit extends Cubit<WelcomeState> {
 
   Future<void> init() async {
     await Future.wait([
-      Future.delayed(const Duration(milliseconds: 2000)),
+      Future.delayed(const Duration(milliseconds: 4000)),
       auth.checkSignIn()
     ]);
     if (auth.state is AuthLogged) {

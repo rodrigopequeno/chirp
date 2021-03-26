@@ -1,9 +1,10 @@
 import 'package:bloc/bloc.dart';
-import 'package:chirp/app/core/usecases/usecase.dart';
-import 'package:chirp/app/features/welcome/domain/entities/logged_user.dart';
-import 'package:chirp/app/features/welcome/domain/usecases/get_logged_user.dart';
-import 'package:chirp/app/features/welcome/domain/usecases/sign_out.dart';
 import 'package:equatable/equatable.dart';
+
+import '../../features/welcome/domain/entities/logged_user.dart';
+import '../../features/welcome/domain/usecases/get_logged_user.dart';
+import '../../features/welcome/domain/usecases/sign_out.dart';
+import '../usecases/usecase.dart';
 
 part 'auth_state.dart';
 
